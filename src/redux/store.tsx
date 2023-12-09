@@ -3,7 +3,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import languageReducer from './reducers/language';
 
 export const reducers = combineReducers({
-  language: languageReducer,
+  settings: languageReducer,
 });
 
 export const store = configureStore({
