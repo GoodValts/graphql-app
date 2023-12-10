@@ -1,0 +1,18 @@
+// $marginDesktop: 20px;
+// $marginDesktopDiv2: calc($marginDesktop / 2);
+// $marginDesktopDiv4: calc($marginDesktop / 4);
+
+// $defaultTextColor: #ffdead;
+// $highlightedTextColor: #faebd7;
+
+@mixin _tablet {
+  @media (max-width: 1279.98px) {
+    @content;
+  }
+}
+
+@mixin _mobile {
+  @media (max-width: 767.98px) {
+    @content;
+  }
+}
