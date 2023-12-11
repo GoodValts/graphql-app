@@ -33,7 +33,8 @@
     "setupTest.ts",
     "__mocks__/handlers.tsx",
     "__mocks__/mswServer.tsx",
-    "__tests__/tests-helpers"
+    "__tests__/tests-helpers",
+    "custom.d.ts"
   ],
   "references": [
     {

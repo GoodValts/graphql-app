@@ -83,6 +83,7 @@
         "babel.config.js",
         "jest.config.js",
         "setupTest.ts",
+        "custom.d.ts",
         "__mocks__/handlers.tsx",
         "__mocks__/mswServer.tsx"
     ]
