@@ -27,12 +27,14 @@ const Header = (): JSX.Element => {
           <Stack direction="horizontal" gap={2} className="ms-auto">
             <Button
               variant="outline-primary"
+              size="lg"
               onClick={(): void => navigate('/login')}
             >
               Sign in
             </Button>
             <Button
               variant="outline-primary"
+              size="lg"
               onClick={(): void => navigate('/registration')}
             >
               Sign up
