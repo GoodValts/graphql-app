@@ -12,7 +12,7 @@ const Header = (): JSX.Element => {
     <header className={styles.header}>
       <Stack direction="horizontal" gap={4}>
         <img src={logo} className={styles.logo} alt="logo" />
-        <span>PheniexGraphiQL</span>
+        <span>PhoenixGraphiQL</span>
       </Stack>
       <Stack direction="horizontal" className="ms-auto">
         {isAuth ? (
