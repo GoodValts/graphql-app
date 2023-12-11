@@ -1,5 +1,50 @@
 @import '../../general';
 
-.exampleStyle {
+.header {
   display: flex;
+  padding: 20px 40px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background-color: #1b2240;
+  color: #ffffff;
 }
+.logoContainer {
+  display: flex;
+  min-width: 13%;
+  max-width: 45%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.6rem;
+}
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.navContainer {
+  min-width: 20%;
+  max-width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+  align-items: center;
+  & a {
+    text-decoration: none;
+    color: #74afdb;
+    border: 2px solid #566992;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    &:hover {
+      color: #566992;
+    }
+  }
+}
+

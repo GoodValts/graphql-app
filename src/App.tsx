@@ -9,6 +9,7 @@ import GraphQLPage from './pages/GraphQL/graphQL';
 import RegistrationPage from './pages/Registration/registration';
 import WelcomePage from './pages/WelcomePage/welcome';
 import LayoutPage from './pages/LayoutPage/LayoutPage';
+import './_general.scss';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
