@@ -5,23 +5,6 @@
 // $defaultTextColor: #ffdead;
 // $highlightedTextColor: #faebd7;
 
-body {
-  margin: 0;
-}
-
-html {
-  font-size: 10px;
-}
-
-main {
-  min-height: 50vw;
-}
-
-#root {
-  width: 100%;
-  box-sizing: border-box;
-}
-
 @mixin _tablet {
   @media (max-width: 1279.98px) {
     @content;
