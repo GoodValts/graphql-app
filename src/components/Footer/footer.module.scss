@@ -1,5 +1,24 @@
 @import '../../general';
 
-.exampleStyle {
+.footer {
   display: flex;
+  padding: 20px 40px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1b2240;
+  font-size: 1.4rem;
+  color: #ffffff;
+}
+.gitText {
+  margin-left: 5px;
+}
+.rssLogo {
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+  }
+}
+.year {
+  width: 30%;
 }
