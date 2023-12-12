@@ -76,13 +76,6 @@ const registerWithEmailAndPassword = async (
     console.error(err);
   }
 };
-const sendPasswordReset = async (email: string): Promise<void> => {
-  try {
-    await sendPasswordResetEmail(auth, email);
-  } catch (err) {
-    console.error(err);
-  }
-};
 const logout = (): void => {
   signOut(auth);
 };
@@ -92,6 +85,5 @@ export {
   signInWithGoogle,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
-  sendPasswordReset,
   logout,
 };
