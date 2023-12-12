@@ -1,9 +1,10 @@
-// $marginDesktop: 20px;
-// $marginDesktopDiv2: calc($marginDesktop / 2);
-// $marginDesktopDiv4: calc($marginDesktop / 4);
+$marginDesktop: 20px;
+$marginDesktopDiv2: calc($marginDesktop / 2);
+$marginDesktopDiv4: calc($marginDesktop / 4);
 
-// $defaultTextColor: #ffdead;
-// $highlightedTextColor: #faebd7;
+$defaultTextColor: SteelBlue;
+$highlightedTextColor: CornflowerBlue;
+$disabledTextColor: LightSlateGray;
 
 @mixin _tablet {
   @media (max-width: 1279.98px) {
@@ -14,5 +15,26 @@
 @mixin _mobile {
   @media (max-width: 767.98px) {
     @content;
+  }
+}
+
+@mixin _button() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $defaultTextColor;
+  background-color: transparent;
+  border: 0;
+  font-size: 1.2rem;
+  border: 1px solid $defaultTextColor;
+  border-radius: $marginDesktopDiv2;
+  padding: $marginDesktopDiv2 $marginDesktop;
+  margin: $marginDesktopDiv4;
+
+  &:hover {
+    cursor: pointer;
+    border: 1px solid $highlightedTextColor;
+    color: $highlightedTextColor;
+    scale: 0.95;
   }
 }

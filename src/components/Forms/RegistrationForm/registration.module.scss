@@ -1,0 +1,59 @@
+@import '../../../general';
+
+.exampleStyle {
+  display: flex;
+}
+
+.form {
+  display: block;
+  width: 90vw;
+  min-width: 260px;
+  max-width: 400px;
+  border-radius: $marginDesktopDiv2;
+  margin: $marginDesktop auto;
+  padding: $marginDesktopDiv2 $marginDesktop;
+}
+
+.header {
+  font-weight: 700;
+  font-size: 1.8rem;
+  text-align: center;
+  color: $defaultTextColor;
+  margin-bottom: $marginDesktop;
+}
+
+.button {
+  @include _button;
+  margin: $marginDesktopDiv2 auto;
+
+
+  &Disabled {
+    color: $disabledTextColor;
+    border: 1px solid $disabledTextColor;
+
+    &:hover {
+      cursor: not-allowed;
+      color: $disabledTextColor;
+      border: 1px solid $disabledTextColor;
+      scale: 1;
+    }
+  }
+}
+
+.paragraph {
+  color: $defaultTextColor;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.link {
+  color: $defaultTextColor;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+  text-align: center;
+
+  &:hover {
+    color: $highlightedTextColor;
+  }
+}
