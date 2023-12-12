@@ -1,14 +1,18 @@
-import { Nav, Stack, Button } from 'react-bootstrap';
+import { Nav, Stack, Button, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import styles from './header.module.scss';
 import logo from '../../assets/img/logo.png';
 import { AuthContext } from '../../controllers/appControllers';
 
-let timeout;
 let scroll = 0;
+const radios = [
+  { name: 'En', value: '1' },
+  { name: 'Ru', value: '2' },
+];
 
 const Header = (): JSX.Element => {
+  const [radioValue, setRadioValue] = useState('1');
   const { isAuth } = useContext(AuthContext);
   const [scrollWindow, setScrollWindow] = useState(false);
   const navigate = useNavigate();
@@ -33,7 +37,24 @@ const Header = (): JSX.Element => {
         <img src={logo} className={styles.logo} alt="logo" />
         <span>PhoenixGraphiQL</span>
       </Stack>
-      <Stack direction="horizontal" className="ms-auto">
+      <Stack direction="horizontal" className={`ms-auto ${styles.container}`}>
+        <ButtonGroup>
+          {radios.map((radio, ind) => (
+            <ToggleButton
+              key={radio.value}
+              id={`radio-${ind}`}
+              type="radio"
+              name="radio"
+              variant="outline-info"
+              value={radio.value}
+              size="lg"
+              checked={radioValue === radio.value}
+              onChange={(e): void => setRadioValue(e.currentTarget.value)}
+            >
+              {radio.name}
+            </ToggleButton>
+          ))}
+        </ButtonGroup>
         {isAuth ? (
           <>
             <Nav
