@@ -20,6 +20,9 @@
     font-size: 1.4rem;
     transition: all 0.5s linear;
   }
+  & a {
+    text-decoration: none;
+  }
 }
 
 .container {
@@ -31,7 +34,13 @@
   height: 50px;
   border-radius: 50%;
 }
-
+.logoText {
+  color: #ffffff;
+  &:hover {
+    color: #d6d6d6;
+    transition: .3s;
+  }
+}
 .nav {
   display: flex;
   width: 45%;

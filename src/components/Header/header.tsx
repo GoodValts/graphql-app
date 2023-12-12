@@ -1,5 +1,5 @@
 import { Nav, Stack, Button, ButtonGroup, ToggleButton } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import styles from './header.module.scss';
 import logo from '../../assets/img/logo.png';
@@ -35,7 +35,9 @@ const Header = (): JSX.Element => {
     >
       <Stack direction="horizontal" gap={4}>
         <img src={logo} className={styles.logo} alt="logo" />
-        <span>PhoenixGraphiQL</span>
+        <Link to="/">
+          <span className={styles.logoText}>PhoenixGraphiQL</span>
+        </Link>
       </Stack>
       <Stack direction="horizontal" className={`ms-auto ${styles.container}`}>
         <ButtonGroup>
@@ -64,7 +66,12 @@ const Header = (): JSX.Element => {
               defaultActiveKey="/"
             >
               <Nav.Item>
-                <Nav.Link href="/graphQL" eventKey="graphQL">
+                <Nav.Link
+                  // href="/graphQL"
+                  eventKey="graphQL"
+                  data-testid="graphql-btn"
+                  onClick={(): void => navigate('/graphQL')}
+                >
                   GraphiQL
                 </Nav.Link>
               </Nav.Item>

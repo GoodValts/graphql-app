@@ -32,7 +32,8 @@
     "src",
     "setupTest.ts",
     "__tests__/tests-helpers",
-    "custom.d.ts"
+    "custom.d.ts",
+    "__tests__/",
   ],
   "references": [
     {
