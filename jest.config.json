@@ -1,0 +1,21 @@
+{
+    "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "ts-jest"
+    },
+    "extensionsToTreatAsEsm": [".tsx"],
+    "bail": 1,
+    "verbose": true,
+    "moduleNameMapper": {
+      "\\.(css|scss|gif|svg)$": "<rootDir>/__mocks__/styleMock.json"
+    },
+    "setupFilesAfterEnv": ["<rootDir>/setupTest.ts"],
+    "testEnvironmentOptions": {
+      "customExportConditions": [""]
+    },
+    "collectCoverageFrom": [
+      "src/**/*.tsx",
+      "!**/hoc/**",
+      "!src/main.tsx"
+  ]
+  }
