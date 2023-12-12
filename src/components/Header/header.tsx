@@ -16,13 +16,27 @@ const Header = (): JSX.Element => {
       </Stack>
       <Stack direction="horizontal" className="ms-auto">
         {isAuth ? (
-          <Nav className={styles.nav} fill variant="pills" defaultActiveKey="/">
-            <Nav.Item>
-              <Nav.Link href="/graphQL" eventKey="graphQL">
-                GraphiQL
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
+          <>
+            <Nav
+              className={styles.nav}
+              fill
+              variant="pills"
+              defaultActiveKey="/"
+            >
+              <Nav.Item>
+                <Nav.Link href="/graphQL" eventKey="graphQL">
+                  GraphiQL
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+            <Button
+              variant="outline-info"
+              size="lg"
+              onClick={(): void => navigate('/')}
+            >
+              Sign out
+            </Button>
+          </>
         ) : (
           <Stack direction="horizontal" gap={2} className="ms-auto">
             <Button

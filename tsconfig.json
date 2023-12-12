@@ -31,8 +31,6 @@
     ".eslintrc.json",
     "src",
     "setupTest.ts",
-    "__mocks__/handlers.tsx",
-    "__mocks__/mswServer.tsx",
     "__tests__/tests-helpers",
     "custom.d.ts"
   ],

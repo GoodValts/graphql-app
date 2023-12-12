@@ -19,18 +19,20 @@
 
 .nav {
   display: flex;
-  width: 30%;
+  width: 45%;
   justify-content: space-between;
   align-items: center;
+  margin-right: 10px;
   & a {
     text-decoration: none;
-    color: #74afdb;
-    border: 2px solid #566992;
+    color: #0dcaf0;
+    border: 1px solid #0dcaf0;
     padding: 5px;
     border-radius: 5px;
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     &:hover {
-      color: #566992;
+      color: #000000;
+      background-color: #0dcaf0;
     }
   }
 }
