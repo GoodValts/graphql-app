@@ -6,9 +6,10 @@ import {
 } from 'react-router-dom';
 import NotFoundPage from './pages/404/404';
 import GraphQLPage from './pages/GraphQL/graphQL';
-import RegistrationPage from './pages/Registration/registration';
+import RegistrationPage from './pages/RegistrationPage/registration';
 import WelcomePage from './pages/WelcomePage/welcome';
 import LayoutPage from './pages/LayoutPage/LayoutPage';
+import LoginPage from './pages/LoginPage/login';
 import './App.scss';
 
 const router = createBrowserRouter(
@@ -17,7 +18,7 @@ const router = createBrowserRouter(
       <Route index element={<WelcomePage />} />
       <Route path="/graphQL" element={<GraphQLPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
-      <Route path="/login" element={<RegistrationPage />} />
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/*" element={<NotFoundPage />} />
     </Route>
   )
