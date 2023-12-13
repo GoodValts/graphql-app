@@ -7,20 +7,20 @@ import styles from './footer.module.scss';
 
 const textObj: {
   [key: string]: {
-    github: string;
+    // github: string;
     Ivan: string;
     Anastasiya: string;
     Natallia: string;
   };
 } = {
   en: {
-    github: 'GitHub:',
+    // github: 'GitHub:',
     Ivan: 'Ivan Martynjuk',
     Anastasiya: 'Anastasiya Alisenok',
     Natallia: 'Natallia Ivanyuk',
   },
   ru: {
-    github: 'ГитХаб:',
+    // github: 'ГитХаб:',
     Ivan: 'Иван Мартынюк',
     Anastasiya: 'Анастасия Алисёнок',
     Natallia: 'Наталья Иванюк',
@@ -36,7 +36,7 @@ const Footer = (): JSX.Element => {
         <Container>
           <Navbar.Brand>
             <img src={git} width={20} alt="git-logo" />
-            <span className={styles.gitText}>{textObj[lang].github}</span>
+            <span className={styles.gitText}>GitHub:</span>
           </Navbar.Brand>
           <Nav className="ma-auto">
             <Nav.Link href="https://github.com/goodvalts">
