@@ -6,8 +6,9 @@
   min-width: 260px;
   max-width: 400px;
   border-radius: $marginDesktopDiv2;
-  margin: $marginDesktop auto;
-  padding: $marginDesktopDiv2 $marginDesktop;
+  margin: 0 auto;
+  padding: 130px $marginDesktop;
+  padding-bottom: 60px;
 }
 
 .header {
@@ -21,6 +22,7 @@
 .button {
   @include _button;
   margin: $marginDesktopDiv2 auto;
+  margin-bottom: 30px;
 
   &Disabled {
     color: $disabledTextColor;

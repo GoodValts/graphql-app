@@ -16,6 +16,8 @@
     "coverage": "npx jest --coverage"
   },
   "dependencies": {
+    "@babel/plugin-proposal-do-expressions": "^7.23.3",
+    "@firebase/app": "^0.9.25",
     "@hookform/resolvers": "^3.3.2",
     "@reduxjs/toolkit": "^2.0.1",
     "@testing-library/jest-dom": "^6.1.4",
@@ -32,6 +34,7 @@
     "react-firebase-hooks": "^5.1.1",
     "react-hook-form": "^7.49.0",
     "react-redux": "^9.0.4",
+    "react-router": "^6.21.0",
     "react-router-dom": "6.4",
     "sass": "^1.69.4",
     "sort-by": "^0.0.2",

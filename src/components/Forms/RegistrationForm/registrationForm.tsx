@@ -1,10 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Alert } from 'react-bootstrap';
 import styles from './registrationForm.module.scss';
 import registrationSchema from './yup';
 import Input from '../Input/input';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectLanguage } from '../../../redux/store';
+import { registerWithEmailAndPassword, auth } from '../../../firebase/firebase';
 
 type RegistrationFormValues = {
   name: string;
@@ -43,6 +48,13 @@ const textObj: {
 
 const RegistrationForm = (): JSX.Element => {
   const lang = useAppSelector(selectLanguage);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [show, setShow] = useState(false);
+  const [user, loading, error] = useAuthState(auth);
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -53,10 +65,23 @@ const RegistrationForm = (): JSX.Element => {
     resolver: yupResolver(registrationSchema(lang)),
   });
 
+  useEffect(() => {
+    if (loading) return;
+    if (user) {
+      setShow(true);
+      setTimeout(() => {
+        setShow(false);
+        navigate('/graphQL');
+      }, 3000);
+    }
+  }, [user, loading]);
+
   return (
     <form
       className={styles.form}
-      onSubmit={handleSubmit((d) => console.log('data=', d))}
+      onSubmit={handleSubmit(() =>
+        registerWithEmailAndPassword(name, email, password)
+      )}
     >
       <h2 className={styles.header}>{textObj[lang].header}</h2>
       <Input<RegistrationFormValues>
@@ -64,6 +89,7 @@ const RegistrationForm = (): JSX.Element => {
         name="name"
         errors={errors.name}
         register={register}
+        setState={setName}
         required
       />
       <Input<RegistrationFormValues>
@@ -71,11 +97,13 @@ const RegistrationForm = (): JSX.Element => {
         name="email"
         errors={errors.email}
         register={register}
+        setState={setEmail}
         required
       />
       <Input<RegistrationFormValues>
         label={textObj[lang].password}
         name="password"
+        setState={setPassword}
         errors={errors.password}
         register={register}
         required
@@ -92,6 +120,7 @@ const RegistrationForm = (): JSX.Element => {
         type="submit"
         value={textObj[lang].button}
       />
+      {show && <Alert variant="success">You are successfull register!</Alert>}
     </form>
   );
 };

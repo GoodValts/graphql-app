@@ -1,10 +1,15 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
 import styles from './loginForm.module.scss';
 import loginSchema from './yup';
 import Input from '../Input/input';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectLanguage } from '../../../redux/store';
+import { auth, logInWithEmailAndPassword } from '../../../firebase/firebase';
 
 type LoginFormValues = {
   email: string;
@@ -34,7 +39,12 @@ const textObj: {
 };
 
 const LoginForm = (): JSX.Element => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [user, loading, error] = useAuthState(auth);
+  const [show, setShow] = useState(false);
   const lang = useAppSelector(selectLanguage);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -45,10 +55,24 @@ const LoginForm = (): JSX.Element => {
     resolver: yupResolver(loginSchema(lang)),
   });
 
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
+    }
+    if (user) {
+      setShow(true);
+      setTimeout(() => {
+        setShow(false);
+        navigate('/graphQL');
+      }, 3000);
+    }
+  }, [user, loading]);
+
   return (
     <form
       className={styles.form}
-      onSubmit={handleSubmit((d) => console.log('data=', d))}
+      onSubmit={handleSubmit(() => logInWithEmailAndPassword(email, password))}
     >
       <h2 className={styles.header}>{textObj[lang].header}</h2>
       <Input<LoginFormValues>
@@ -57,6 +81,7 @@ const LoginForm = (): JSX.Element => {
         name="email"
         errors={errors.email}
         register={register}
+        setState={setEmail}
         required
       />
       <Input<LoginFormValues>
@@ -64,6 +89,7 @@ const LoginForm = (): JSX.Element => {
         name="password"
         errors={errors.password}
         register={register}
+        setState={setPassword}
         required
       />
       <input
@@ -71,6 +97,7 @@ const LoginForm = (): JSX.Element => {
         type="submit"
         value={textObj[lang].button}
       />
+      {show && <Alert variant="success">You are successfull login!</Alert>}
     </form>
   );
 };
