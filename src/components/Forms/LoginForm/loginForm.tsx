@@ -71,7 +71,7 @@ const LoginForm = (): JSX.Element => {
 
   return (
     <form
-      className={styles.form}
+      className={show ? `${styles.form} ${styles.showAlert}` : styles.form}
       onSubmit={handleSubmit(() => logInWithEmailAndPassword(email, password))}
     >
       <h2 className={styles.header}>{textObj[lang].header}</h2>

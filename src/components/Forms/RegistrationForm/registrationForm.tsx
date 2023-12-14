@@ -78,7 +78,7 @@ const RegistrationForm = (): JSX.Element => {
 
   return (
     <form
-      className={styles.form}
+      className={show ? `${styles.form} ${styles.showAlert}` : styles.form}
       onSubmit={handleSubmit(() =>
         registerWithEmailAndPassword(name, email, password)
       )}
