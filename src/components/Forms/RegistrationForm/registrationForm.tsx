@@ -26,6 +26,7 @@ const textObj: {
     password: string;
     confirmPassword: string;
     button: string;
+    alert: string;
   };
 } = {
   en: {
@@ -35,6 +36,7 @@ const textObj: {
     password: 'Password:',
     confirmPassword: 'Confirm password',
     button: 'Submit',
+    alert: 'You are successfull register!',
   },
   ru: {
     header: 'Создайте аккаунт',
@@ -43,6 +45,7 @@ const textObj: {
     password: 'Пароль:',
     confirmPassword: 'Подтвердите пароль:',
     button: 'Создать',
+    alert: 'Вы успешно зарегистрировались!',
   },
 };
 
@@ -120,7 +123,7 @@ const RegistrationForm = (): JSX.Element => {
         type="submit"
         value={textObj[lang].button}
       />
-      {show && <Alert variant="success">You are successfull register!</Alert>}
+      {show && <Alert variant="success">{textObj[lang].alert}</Alert>}
     </form>
   );
 };

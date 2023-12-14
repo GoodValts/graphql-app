@@ -22,6 +22,7 @@ const textObj: {
     email: string;
     password: string;
     button: string;
+    alert: string;
   };
 } = {
   en: {
@@ -29,12 +30,14 @@ const textObj: {
     email: 'E-mail:',
     password: 'Password:',
     button: 'Submit',
+    alert: 'You are successfull login!',
   },
   ru: {
     header: 'Войдите в свой аккаунт',
     email: 'Электронная почта:',
     password: 'Пароль:',
     button: 'Войти',
+    alert: 'Вы успешно авторизованы!',
   },
 };
 
@@ -97,7 +100,7 @@ const LoginForm = (): JSX.Element => {
         type="submit"
         value={textObj[lang].button}
       />
-      {show && <Alert variant="success">You are successfull login!</Alert>}
+      {show && <Alert variant="success">{textObj[lang].alert}</Alert>}
     </form>
   );
 };
