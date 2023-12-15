@@ -2,13 +2,13 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import LayoutPage from '../../src/pages/LayoutPage/LayoutPage';
-import { AuthContext } from '../../src/controllers/appControllers';
 
-const mockAuthContext = {
-  isAuth: true,
-};
+jest.mock('react-firebase-hooks/auth', () => ({
+  useAuthState: jest.fn() as jest.Mock,
+}));
 
 describe('Test LayoutPage', () => {
   it('click Sign In', async () => {
@@ -17,6 +17,7 @@ describe('Test LayoutPage', () => {
         <LayoutPage />
       </BrowserRouter>
     );
+    (useAuthState as jest.Mock).mockReturnValue([null, false, null]);
     const signInBtn = screen.getByText(/Sign In/i);
     const user = userEvent.setup();
     user.click(signInBtn);
@@ -30,6 +31,7 @@ describe('Test LayoutPage', () => {
         <LayoutPage />
       </BrowserRouter>
     );
+    (useAuthState as jest.Mock).mockReturnValue([null, false, null]);
     const signUpBtn = screen.getByText(/Sign Up/i);
     const user = userEvent.setup();
     user.click(signUpBtn);
@@ -40,11 +42,19 @@ describe('Test LayoutPage', () => {
   it('Checking if the user is authorized there is a button Sign Out ', async () => {
     render(
       <BrowserRouter>
-        <AuthContext.Provider value={mockAuthContext}>
-          <LayoutPage />
-        </AuthContext.Provider>
+        <LayoutPage />
       </BrowserRouter>
     );
+    (useAuthState as jest.Mock).mockReturnValue([
+      {
+        user: {
+          displayName: 'John Doe',
+          email: 'johndoe@example.com',
+        },
+        loading: false,
+        error: null,
+      },
+    ]);
     const signOut = screen.getByText(/Sign Out/i);
     expect(signOut).toBeInTheDocument();
   });

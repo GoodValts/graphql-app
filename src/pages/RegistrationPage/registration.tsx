@@ -1,6 +1,4 @@
-import { useContext } from 'react';
 import RegistrationForm from '../../components/Forms/RegistrationForm/registrationForm';
-import { AuthContext } from '../../controllers/appControllers';
 import { useAppSelector } from '../../redux/hooks';
 import { selectLanguage } from '../../redux/store';
 import styles from './registration.module.scss';

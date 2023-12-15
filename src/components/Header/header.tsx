@@ -1,12 +1,13 @@
 import { Nav, Stack, Button, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import styles from './header.module.scss';
 import logo from '../../assets/img/logo.png';
-import { AuthContext } from '../../controllers/appControllers';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { selectIsAuth, selectLanguage } from '../../redux/store';
+import { selectLanguage } from '../../redux/store';
 import { setLanguage } from '../../redux/reducers/settings';
+import { auth, logout } from '../../firebase/firebase';
 
 let scroll = 0;
 
@@ -40,15 +41,14 @@ const textObj: {
 const Header = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const lang = useAppSelector(selectLanguage);
-  const isAuth = useAppSelector(selectIsAuth);
   const [radioValue, setRadioValue] = useState('1');
   const [scrollWindow, setScrollWindow] = useState(false);
+  const [user] = useAuthState(auth);
   const navigate = useNavigate();
   useEffect(() => {
     window.onscroll = (): void => {
       scroll = window.scrollY;
       if (scroll >= window.scrollY && window.scrollY > 10) {
-        console.log(window.scrollY);
         setScrollWindow(true);
       } else {
         setScrollWindow(false);
@@ -67,7 +67,11 @@ const Header = (): JSX.Element => {
           <span className={styles.logoText}>{textObj[lang].project}</span>
         </Link>
       </Stack>
-      <Stack direction="horizontal" className={`ms-auto ${styles.container}`}>
+      <Stack
+        direction="horizontal"
+        gap={2}
+        className={`ms-auto ${styles.container}`}
+      >
         <ButtonGroup>
           {radios.map((radio, ind) => (
             <ToggleButton
@@ -94,7 +98,7 @@ const Header = (): JSX.Element => {
             </ToggleButton>
           ))}
         </ButtonGroup>
-        {isAuth ? (
+        {user ? (
           <>
             <Nav
               className={styles.nav}
@@ -116,7 +120,10 @@ const Header = (): JSX.Element => {
             <Button
               variant="outline-info"
               size="lg"
-              onClick={(): void => navigate('/')}
+              onClick={(): void => {
+                logout();
+                navigate('/');
+              }}
             >
               {textObj[lang].signOut}
             </Button>

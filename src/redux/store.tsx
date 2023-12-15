@@ -1,11 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import authReducer from './reducers/auth';
 import settingsReducer from './reducers/settings';
 
 export const reducers = combineReducers({
   settings: settingsReducer,
-  auth: authReducer,
 });
 
 export const store = configureStore({
@@ -24,5 +22,3 @@ export const selectLanguage = (state: RootState): string =>
   state.settings.language;
 export const selectEndpoint = (state: RootState): string =>
   state.settings.endpoint;
-
-export const selectIsAuth = (state: RootState): boolean => state.auth.isAuth;
