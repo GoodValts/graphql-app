@@ -109,6 +109,7 @@ const RegistrationForm = (): JSX.Element => {
         setState={setPassword}
         errors={errors.password}
         register={register}
+        type="password"
         required
       />
       <Input<RegistrationFormValues>
@@ -116,6 +117,7 @@ const RegistrationForm = (): JSX.Element => {
         name="confirmPassword"
         errors={errors.confirmPassword}
         register={register}
+        type="password"
         required
       />
       <input

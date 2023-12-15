@@ -93,6 +93,7 @@ const LoginForm = (): JSX.Element => {
         errors={errors.password}
         register={register}
         setState={setPassword}
+        type="password"
         required
       />
       <input
