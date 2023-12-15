@@ -1,15 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 import styles from './loginForm.module.scss';
 import loginSchema from './yup';
 import Input from '../Input/input';
-import { useAppSelector } from '../../../redux/hooks';
-import { selectLanguage } from '../../../redux/store';
 import { auth, logInWithEmailAndPassword } from '../../../firebase/firebase';
+import { AuthContext } from '../../../controllers/appControllers';
 
 type LoginFormValues = {
   email: string;
@@ -46,7 +45,7 @@ const LoginForm = (): JSX.Element => {
   const [password, setPassword] = useState('');
   const [user, loading, error] = useAuthState(auth);
   const [show, setShow] = useState(false);
-  const lang = useAppSelector(selectLanguage);
+  const { lang } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const {

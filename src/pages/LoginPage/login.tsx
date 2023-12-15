@@ -1,8 +1,6 @@
 import { useContext } from 'react';
 import LoginForm from '../../components/Forms/LoginForm/loginForm';
 import { AuthContext } from '../../controllers/appControllers';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { selectLanguage } from '../../redux/store';
 import styles from './login.module.scss';
 
 const textObj: {
@@ -21,7 +19,7 @@ const textObj: {
 };
 
 const LoginPage = (): JSX.Element => {
-  const lang = useAppSelector(selectLanguage);
+  const { lang } = useContext(AuthContext);
   return (
     <>
       <LoginForm />

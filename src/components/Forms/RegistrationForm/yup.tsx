@@ -1,7 +1,4 @@
-import { useSelector } from 'react-redux';
 import * as yup from 'yup';
-import { useAppSelector } from '../../../redux/hooks';
-import { selectLanguage } from '../../../redux/store';
 
 const validationMessages: {
   [key: string]: {

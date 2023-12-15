@@ -1,15 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Alert } from 'react-bootstrap';
 import styles from './registrationForm.module.scss';
 import registrationSchema from './yup';
 import Input from '../Input/input';
-import { useAppSelector } from '../../../redux/hooks';
-import { selectLanguage } from '../../../redux/store';
 import { registerWithEmailAndPassword, auth } from '../../../firebase/firebase';
+import { AuthContext } from '../../../controllers/appControllers';
 
 type RegistrationFormValues = {
   name: string;
@@ -50,7 +49,7 @@ const textObj: {
 };
 
 const RegistrationForm = (): JSX.Element => {
-  const lang = useAppSelector(selectLanguage);
+  const { lang } = useContext(AuthContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
