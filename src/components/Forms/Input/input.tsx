@@ -73,9 +73,9 @@ const Input = <FormValues extends FieldValues>({
           ref={formInput}
         />
         {type === 'password' && (
-          <div className={defStyles.imgCont}>
+          <div className={defStyles.imgContainer}>
             <button
-              className={defStyles.button}
+              className={defStyles.imgButton}
               type="button"
               onClick={(e): void =>
                 showHidePassword(e.target as HTMLImageElement)
