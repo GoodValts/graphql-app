@@ -2,7 +2,9 @@ import { FieldError } from 'react-hook-form/dist/types';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { UseFormRegister } from 'react-hook-form/dist/types/form';
 import { Path } from 'react-hook-form/dist/types/path';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import visibleImg from './inputAssets/visible-icon.png';
+import unVisibleImg from './inputAssets/unVisible-icon.png';
 import defStyles from './input.module.scss';
 
 type InputProps<FormValues extends FieldValues> = {
@@ -33,22 +35,61 @@ const Input = <FormValues extends FieldValues>({
     errorText = errors.message;
   }
 
+  const [isVisible, setIsVisible] = useState(false);
+  const formInput = useRef<HTMLInputElement>(null);
+
+  const showHidePassword = (img: HTMLImageElement): void => {
+    console.log(img);
+    console.log(img.src);
+    console.log(isVisible);
+    const input = formInput.current;
+    if (isVisible) {
+      setIsVisible(false);
+      img.src = unVisibleImg;
+      if (input) input.type = 'password';
+    } else {
+      setIsVisible(true);
+      img.src = visibleImg;
+      if (input) input.type = 'text';
+    }
+  };
+
   return (
     <>
       <label htmlFor={name as string} className={defStyles.label}>
         {label}
       </label>
-      <input
-        id={name as string}
-        accept={accept}
-        type={type}
-        className={`${defStyles.input} ${styles}`}
-        autoComplete={name as string}
-        {...register(name as Path<FormValues>, { required })}
-        onChange={(e): void => {
-          if (setState) setState(e.target.value);
-        }}
-      />
+      <div className={defStyles.container}>
+        <input
+          id={name as string}
+          accept={accept}
+          type={type}
+          className={`${defStyles.input} ${styles}`}
+          autoComplete={name as string}
+          {...register(name as Path<FormValues>, { required })}
+          onChange={(e): void => {
+            if (setState) setState(e.target.value);
+          }}
+          ref={formInput}
+        />
+        {type === 'password' && (
+          <div className={defStyles.imgContainer}>
+            <button
+              className={defStyles.imgButton}
+              type="button"
+              onClick={(e): void =>
+                showHidePassword(e.target as HTMLImageElement)
+              }
+            >
+              <img
+                alt="show/hide"
+                src={unVisibleImg}
+                className={defStyles.img}
+              />
+            </button>
+          </div>
+        )}
+      </div>
       <p className={defStyles.errorMessage}>{errorText}</p>
     </>
   );

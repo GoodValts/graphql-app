@@ -1,6 +1,6 @@
+import { useContext } from 'react';
 import RegistrationForm from '../../components/Forms/RegistrationForm/registrationForm';
-import { useAppSelector } from '../../redux/hooks';
-import { selectLanguage } from '../../redux/store';
+import { AuthContext } from '../../controllers/appControllers';
 import styles from './registration.module.scss';
 
 const textObj: {
@@ -19,7 +19,7 @@ const textObj: {
 };
 
 const RegistrationPage = (): JSX.Element => {
-  const lang = useAppSelector(selectLanguage);
+  const { lang } = useContext(AuthContext);
   return (
     <>
       <RegistrationForm />

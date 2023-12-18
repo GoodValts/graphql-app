@@ -1,8 +1,8 @@
+import { useContext } from 'react';
 import { Container, Nav, Navbar, Stack } from 'react-bootstrap';
 import git from '../../assets/img/git.png';
 import rss from '../../assets/img/rs-school-js_.svg';
-import { useAppSelector } from '../../redux/hooks';
-import { selectLanguage } from '../../redux/store';
+import { AuthContext } from '../../controllers/appControllers';
 import styles from './footer.module.scss';
 
 const textObj: {
@@ -28,7 +28,7 @@ const textObj: {
 };
 
 const Footer = (): JSX.Element => {
-  const lang = useAppSelector(selectLanguage);
+  const { lang } = useContext(AuthContext);
 
   return (
     <footer className={styles.footer}>

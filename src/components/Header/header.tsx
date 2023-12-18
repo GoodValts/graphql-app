@@ -1,13 +1,11 @@
 import { Nav, Stack, Button, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import styles from './header.module.scss';
 import logo from '../../assets/img/logo.png';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { selectLanguage } from '../../redux/store';
-import { setLanguage } from '../../redux/reducers/settings';
 import { auth, logout } from '../../firebase/firebase';
+import { AuthContext } from '../../controllers/appControllers';
 
 let scroll = 0;
 
@@ -39,9 +37,10 @@ const textObj: {
 };
 
 const Header = (): JSX.Element => {
-  const dispatch = useAppDispatch();
-  const lang = useAppSelector(selectLanguage);
-  const [radioValue, setRadioValue] = useState('1');
+  const { lang, setLang } = useContext(AuthContext);
+  const [radioValue, setRadioValue] = useState(
+    localStorage.getItem('lang') || 'en'
+  );
   const [scrollWindow, setScrollWindow] = useState(false);
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
@@ -85,13 +84,11 @@ const Header = (): JSX.Element => {
               checked={radioValue === radio.value}
               onChange={(e): void => {
                 setRadioValue(e.currentTarget.value);
-                dispatch(
-                  setLanguage(
-                    radios
-                      .find((item) => item.value === e.currentTarget.value)!
-                      .value.toLowerCase()
-                  )
-                );
+                const selectedLang = radios
+                  .find((item) => item.value === e.currentTarget.value)!
+                  .value.toLowerCase();
+                setLang(selectedLang);
+                localStorage.setItem('lang', selectedLang);
               }}
             >
               {radio.name}

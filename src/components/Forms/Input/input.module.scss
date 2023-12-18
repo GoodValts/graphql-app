@@ -8,6 +8,12 @@
   margin-bottom: 0;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .input {
   display: flex;
   justify-content: center;
@@ -27,6 +33,26 @@
     border: 0px;
     outline: 0;
     border-bottom: 2px solid royalblue;
+  }
+}
+
+.imgContainer {
+  width: 0px;
+}
+
+.imgButton {
+  position: relative;
+  right: 40px;
+  padding: 0;
+  background: transparent;
+  border: 0px;
+}
+
+.img {
+  width: 20px;
+
+  &:focus {
+    cursor: pointer;
   }
 }
 
