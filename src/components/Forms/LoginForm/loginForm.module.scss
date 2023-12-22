@@ -7,11 +7,7 @@
   max-width: 400px;
   border-radius: $marginDesktopDiv2;
   margin: 0 auto;
-  padding: 130px $marginDesktop;
-  padding-bottom: 60px;
-  &.showAlert {
-    padding-bottom: 15px;
-  }
+  padding: $marginDesktop;
 }
 
 .header {
