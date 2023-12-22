@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 import { selectLanguage } from '../../redux/store';
 import { AuthContext } from '../../controllers/appControllers';
@@ -131,6 +132,7 @@ const textObj: {
 const WelcomePage = (): JSX.Element => {
   const lang = useAppSelector(selectLanguage);
   const { isAuth /* ,  lang */ } = useContext(AuthContext);
+  const navigate = useNavigate();
   return (
     <>
       <header className={styles.mainHeader}>{textObj[lang].header}</header>
@@ -158,11 +160,19 @@ const WelcomePage = (): JSX.Element => {
           </>
         ) : (
           <>
-            <button className={styles.links} type="button">
+            <button
+              className={styles.links}
+              type="button"
+              onClick={(): void => navigate('/login')}
+            >
               {textObj[lang].links.linkSignIn}
             </button>
             <p className={styles.paragraph}> / </p>
-            <button className={styles.links} type="button">
+            <button
+              className={styles.links}
+              type="button"
+              onClick={(): void => navigate('/registration')}
+            >
               {textObj[lang].links.linkSignUp}
             </button>
             <p className={styles.paragraph}>
