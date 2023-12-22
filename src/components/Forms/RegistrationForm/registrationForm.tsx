@@ -3,12 +3,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Alert } from 'react-bootstrap';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { addDoc, collection } from 'firebase/firestore';
+import { ToastContainer } from 'react-toastify';
 import styles from './registrationForm.module.scss';
 import registrationSchema from './yup';
 import Input from '../Input/input';
-import { registerWithEmailAndPassword, auth } from '../../../firebase/firebase';
+import { auth, db } from '../../../firebase/firebase';
 import { AuthContext } from '../../../controllers/appControllers';
+import textObj from './langData';
+import { getErrorMessage, getSuccessMessage } from './getMessage';
 
 type RegistrationFormValues = {
   name: string;
@@ -17,44 +21,12 @@ type RegistrationFormValues = {
   confirmPassword: string;
 };
 
-const textObj: {
-  [key: string]: {
-    header: string;
-    name: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    button: string;
-    alert: string;
-  };
-} = {
-  en: {
-    header: 'Create account',
-    name: 'Name:',
-    email: 'E-mail:',
-    password: 'Password:',
-    confirmPassword: 'Confirm password',
-    button: 'Submit',
-    alert: 'You are successfull register!',
-  },
-  ru: {
-    header: 'Создайте аккаунт',
-    name: 'Имя:',
-    email: 'Электронная почта:',
-    password: 'Пароль:',
-    confirmPassword: 'Подтвердите пароль:',
-    button: 'Создать',
-    alert: 'Вы успешно зарегистрировались!',
-  },
-};
-
 const RegistrationForm = (): JSX.Element => {
   const { lang } = useContext(AuthContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [show, setShow] = useState(false);
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   const navigate = useNavigate();
 
@@ -68,23 +40,30 @@ const RegistrationForm = (): JSX.Element => {
   });
 
   useEffect(() => {
-    if (loading) return;
     if (user) {
-      setShow(true);
       setTimeout(() => {
-        setShow(false);
         navigate('/graphQL');
       }, 3000);
     }
-  }, [user, loading]);
+  }, [user]);
+
+  const submitForm = (): void => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((res) => {
+        addDoc(collection(db, 'users'), {
+          uid: res.user.uid,
+          name,
+          authProvider: 'local',
+          email,
+        }).then(() => getSuccessMessage(lang));
+      })
+      .catch((err) => {
+        getErrorMessage(err.code, lang);
+      });
+  };
 
   return (
-    <form
-      className={show ? `${styles.form} ${styles.showAlert}` : styles.form}
-      onSubmit={handleSubmit(() =>
-        registerWithEmailAndPassword(name, email, password)
-      )}
-    >
+    <form className={styles.form} onSubmit={handleSubmit(submitForm)}>
       <h2 className={styles.header}>{textObj[lang].header}</h2>
       <Input<RegistrationFormValues>
         label={textObj[lang].name}
@@ -124,7 +103,12 @@ const RegistrationForm = (): JSX.Element => {
         type="submit"
         value={textObj[lang].button}
       />
-      {show && <Alert variant="success">{textObj[lang].alert}</Alert>}
+      <ToastContainer
+        position="bottom-center"
+        theme="colored"
+        closeOnClick
+        autoClose={false}
+      />
     </form>
   );
 };

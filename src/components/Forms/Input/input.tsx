@@ -39,9 +39,6 @@ const Input = <FormValues extends FieldValues>({
   const formInput = useRef<HTMLInputElement>(null);
 
   const showHidePassword = (img: HTMLImageElement): void => {
-    console.log(img);
-    console.log(img.src);
-    console.log(isVisible);
     const input = formInput.current;
     if (isVisible) {
       setIsVisible(false);
@@ -70,7 +67,7 @@ const Input = <FormValues extends FieldValues>({
           onChange={(e): void => {
             if (setState) setState(e.target.value);
           }}
-          ref={formInput}
+          // ref={formInput}
         />
         {type === 'password' && (
           <div className={defStyles.imgContainer}>
