@@ -2,7 +2,7 @@ import { FieldError } from 'react-hook-form/dist/types';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { UseFormRegister } from 'react-hook-form/dist/types/form';
 import { Path } from 'react-hook-form/dist/types/path';
-import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import visibleImg from './inputAssets/visible-icon.png';
 import unVisibleImg from './inputAssets/unVisible-icon.png';
 import defStyles from './input.module.scss';
@@ -28,29 +28,24 @@ const Input = <FormValues extends FieldValues>({
   register,
   required,
   errors,
-  setState,
 }: InputProps<FormValues>): JSX.Element => {
+  const [isVisible, setIsVisible] = useState(false);
+
   let errorText = '';
   if (errors && errors.message) {
     errorText = errors.message;
   }
 
-  const [isVisible, setIsVisible] = useState(false);
-  const formInput = useRef<HTMLInputElement>(null);
-
   const showHidePassword = (img: HTMLImageElement): void => {
     console.log(img);
     console.log(img.src);
     console.log(isVisible);
-    const input = formInput.current;
     if (isVisible) {
       setIsVisible(false);
       img.src = unVisibleImg;
-      if (input) input.type = 'password';
     } else {
       setIsVisible(true);
       img.src = visibleImg;
-      if (input) input.type = 'text';
     }
   };
 
@@ -63,14 +58,10 @@ const Input = <FormValues extends FieldValues>({
         <input
           id={name as string}
           accept={accept}
-          type={type}
+          type={isVisible ? 'text' : type}
           className={`${defStyles.input} ${styles}`}
           autoComplete={name as string}
           {...register(name as Path<FormValues>, { required })}
-          onChange={(e): void => {
-            if (setState) setState(e.target.value);
-          }}
-          ref={formInput}
         />
         {type === 'password' && (
           <div className={defStyles.imgContainer}>
