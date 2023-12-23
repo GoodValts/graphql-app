@@ -28,6 +28,7 @@ const Input = <FormValues extends FieldValues>({
   register,
   required,
   errors,
+  setState,
 }: InputProps<FormValues>): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -62,6 +63,9 @@ const Input = <FormValues extends FieldValues>({
           className={`${defStyles.input} ${styles}`}
           autoComplete={name as string}
           {...register(name as Path<FormValues>, { required })}
+          onChange={(e): void => {
+            if (setState) setState(e.target.value);
+          }}
         />
         {type === 'password' && (
           <div className={defStyles.imgContainer}>
