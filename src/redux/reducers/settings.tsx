@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+/* import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SettingsInitialStateTypes {
   language: string;
@@ -28,4 +28,4 @@ export const settingsSlice = createSlice({
 export const { setLanguage, setEndpoint } = settingsSlice.actions;
 
 const settingsReducer = settingsSlice.reducer;
-export default settingsReducer;
+export default settingsReducer; */

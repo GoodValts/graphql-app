@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getErrorMessage, getSuccessMessage } from './getMessage';
 import textObj from './langData';
 
-type LoginFormValues = {
+export type LoginFormValues = {
   email: string;
   password: string;
 };

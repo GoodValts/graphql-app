@@ -7,7 +7,7 @@ import visibleImg from './inputAssets/visible-icon.png';
 import unVisibleImg from './inputAssets/unVisible-icon.png';
 import defStyles from './input.module.scss';
 
-type InputProps<FormValues extends FieldValues> = {
+export type InputProps<FormValues extends FieldValues> = {
   styles?: string;
   type?: string;
   accept?: string;
@@ -28,6 +28,7 @@ const Input = <FormValues extends FieldValues>({
   register,
   required,
   errors,
+  setState,
 }: InputProps<FormValues>): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -61,13 +62,18 @@ const Input = <FormValues extends FieldValues>({
           type={isVisible ? 'text' : type}
           className={`${defStyles.input} ${styles}`}
           autoComplete={name as string}
+          data-testid={name}
           {...register(name as Path<FormValues>, { required })}
+          onChange={(e): void => {
+            if (setState) setState(e.target.value);
+          }}
         />
         {type === 'password' && (
           <div className={defStyles.imgContainer}>
             <button
               className={defStyles.imgButton}
               type="button"
+              data-testid="see-btn"
               onClick={(e): void =>
                 showHidePassword(e.target as HTMLImageElement)
               }
@@ -88,6 +94,7 @@ const Input = <FormValues extends FieldValues>({
 
 Input.defaultProps = {
   type: 'text',
+  value: '',
   accept: '',
   styles: '',
   setState: (): void => {},
