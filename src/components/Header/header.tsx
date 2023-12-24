@@ -2,10 +2,10 @@ import { Nav, Stack, Button, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import styles from './header.module.scss';
-import logo from '../../assets/img/logo.png';
+import logo from '../../assets/img/logo3.png';
 import { auth, logout } from '../../firebase/firebase';
 import { AuthContext } from '../../controllers/appControllers';
+import styles from './header.module.scss';
 
 let scroll = 0;
 
@@ -37,13 +37,15 @@ const textObj: {
 };
 
 const Header = (): JSX.Element => {
+  const navigate = useNavigate();
+
   const { lang, setLang } = useContext(AuthContext);
   const [radioValue, setRadioValue] = useState(
     localStorage.getItem('lang') || 'en'
   );
   const [scrollWindow, setScrollWindow] = useState(false);
   const [user] = useAuthState(auth);
-  const navigate = useNavigate();
+
   useEffect(() => {
     window.onscroll = (): void => {
       scroll = window.scrollY;
@@ -54,6 +56,7 @@ const Header = (): JSX.Element => {
       }
     };
   }, []);
+
   return (
     <header
       className={
@@ -91,6 +94,7 @@ const Header = (): JSX.Element => {
                 setLang(selectedLang);
                 localStorage.setItem('lang', selectedLang);
               }}
+              className={styles.red}
             >
               {radio.name}
             </ToggleButton>

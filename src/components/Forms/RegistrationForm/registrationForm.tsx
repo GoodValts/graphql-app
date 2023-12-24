@@ -23,9 +23,6 @@ type RegistrationFormValues = {
 
 const RegistrationForm = (): JSX.Element => {
   const { lang } = useContext(AuthContext);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [user] = useAuthState(auth);
 
   const navigate = useNavigate();
@@ -47,7 +44,8 @@ const RegistrationForm = (): JSX.Element => {
     }
   }, [user]);
 
-  const submitForm = (): void => {
+  const submitForm = (d: RegistrationFormValues): void => {
+    const { name, email, password } = d;
     createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
         addDoc(collection(db, 'users'), {
@@ -63,14 +61,13 @@ const RegistrationForm = (): JSX.Element => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(submitForm)}>
+    <form className={styles.form} onSubmit={handleSubmit((d) => submitForm(d))}>
       <h2 className={styles.header}>{textObj[lang].header}</h2>
       <Input<RegistrationFormValues>
         label={textObj[lang].name}
         name="name"
         errors={errors.name}
         register={register}
-        setState={setName}
         required
       />
       <Input<RegistrationFormValues>
@@ -78,13 +75,11 @@ const RegistrationForm = (): JSX.Element => {
         name="email"
         errors={errors.email}
         register={register}
-        setState={setEmail}
         required
       />
       <Input<RegistrationFormValues>
         label={textObj[lang].password}
         name="password"
-        setState={setPassword}
         errors={errors.password}
         register={register}
         type="password"

@@ -1,9 +1,5 @@
 @import '../../../general';
 
-.exampleStyle {
-  display: flex;
-}
-
 .form {
   display: block;
   width: 90vw;
@@ -12,24 +8,42 @@
   border-radius: $marginDesktopDiv2;
   margin: 0 auto;
   padding: 130px $marginDesktop;
-  padding-bottom: 60px;
-  &.showAlert {
-    padding-bottom: 15px;
+  padding: $marginDesktop;
+  padding-top: calc(90px + $marginDesktop);
+  
+  @include _tablet {
+    padding: $marginTablet;
+    padding-top: calc(90px + $marginTablet);
+  }
+  
+  @include _mobile {
+    padding: $marginMobile;
+    padding-top: calc(90px + $marginMobile);
   }
 }
 
 .header {
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: $sizeDesctopBig;
   text-align: center;
   color: $defaultTextColor;
   margin-bottom: $marginDesktop;
+
+  @include _tablet {
+    font-size: $sizeMobileBig;
+  }
+
+  @include _mobile {
+    font-size: $sizeMobileBig;
+    margin-bottom: $marginMobile;
+  }
 }
 
 .button {
   @include _button;
   margin: $marginDesktopDiv2 auto;
-  margin-bottom: 30px;
+  margin-top: $marginDesktop;
+  font-size: $sizeDesctopNormal;
 
   &Disabled {
     color: $disabledTextColor;
@@ -41,5 +55,10 @@
       border: 1px solid $disabledTextColor;
       scale: 1;
     }
+  }
+  
+  @include _mobile {
+    font-size: $sizeMobileNormal;
+    margin-top: $marginMobile;    
   }
 }

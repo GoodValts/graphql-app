@@ -9,7 +9,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
-  background-color: #1b2240;
+  background-color: $mainColor;
   font-size: 1.6rem;
   font-weight: 700;
   color: #ffffff;
@@ -41,6 +41,7 @@
     transition: 0.3s;
   }
 }
+
 .nav {
   display: flex;
   width: 45%;
@@ -59,4 +60,8 @@
       background-color: #0dcaf0;
     }
   }
+}
+  
+.red {
+  background-color: red;
 }

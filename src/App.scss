@@ -1,14 +1,11 @@
-body {
+* {
+  transition-duration: .3s;
   margin: 0;
   padding: 0;
 }
 
-html {
-  font-size: 10px;
-}
-
 main {
-  min-height: 50vw;
+  min-height: calc(100vh - 100px);
 }
 
 #root {
