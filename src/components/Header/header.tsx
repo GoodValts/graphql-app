@@ -82,6 +82,7 @@ const Header = (): JSX.Element => {
               value={radio.value}
               size="lg"
               checked={radioValue === radio.value}
+              data-testid={radio.value}
               onChange={(e): void => {
                 setRadioValue(e.currentTarget.value);
                 const selectedLang = radios
