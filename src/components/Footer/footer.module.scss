@@ -5,26 +5,118 @@
   height: 100px;
   justify-content: space-between;
   align-items: center;
+  
   background-color: $mainColor;
   padding: $marginDesktopDiv2 $marginDesktop;
+
+  @include _tablet {
+    padding: $marginDesktopDiv4 $marginDesktopDiv2;
+  }
+
+  @include _mobile {
+    padding: $marginDesktopDiv4;
+  }
+}
+
+.members {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.member {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin: $marginDesktopDiv4 $marginDesktopDiv2;
+  color: $defaultHeaderColor;
+
+  &:hover {
+    color: $highlightedHeaderColor;
+  }
+
+  @include _tablet {
+    margin: $marginDesktopDiv4;
+  }
+
+  @include _mobile {
+    margin: 3px;
+  }
+}
+
+.gitLogo {
+  display: block;
+  width: 25px;
+  margin: 0 $marginDesktopDiv4;
+
+  @include _tablet {
+    width: 20px;
+  }
+
+  @include _mobile {
+    margin: 0 4px;
+  }
 }
 
 .gitText {
-  margin-left: 5px;
-}
+  display: block;
+  font-size: $sizeDesctopNormal;
 
-.rssLogo {
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.1);
-    transition: 0.3s;
+  @include _tablet {
+    font-size: $sizeDesctopSmall;
   }
 }
 
 .year {
-  width: 30%;
+  display: block;
+  color: $defaultHeaderColor;
+  font-size: $sizeDesctopNormal;
+  white-space: nowrap;
+  text-align: center;
+  margin: $marginDesktopDiv4;
+
+  @include _tablet {
+    font-size: $sizeDesctopSmall;
+  }
+
+  @include _mobile {
+    font-size: $sizeMobileSmall;
+    display: none;
+  }
+
+  &Mobile {
+    display: none;
+    
+    @include _mobile {
+      display: block;
+    }
+  }
 }
 
-.red {
-  background-color: red;
+.rssContainer {
+  display: flex; 
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.rssLogo {
+  cursor: pointer;
+  margin: $marginDesktopDiv4 $marginDesktop;
+  width: 100px;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  @include _tablet {
+    width: 80px;
+    margin: $marginDesktopDiv4 $marginDesktopDiv4;
+  }
+
+  @include _mobile {
+    width: 70px;
+  }
 }

@@ -1,29 +1,31 @@
 import { useContext } from 'react';
-import { Container, Nav, Navbar, Stack } from 'react-bootstrap';
-import git from '../../assets/img/git.png';
+import git from '../../assets/img/github.png';
 import rss from '../../assets/img/rs-school-js_.svg';
+import rssHovered from '../../assets/img/rs-school-js_blue.svg';
 import { AuthContext } from '../../controllers/appControllers';
 import styles from './footer.module.scss';
 
 const textObj: {
   [key: string]: {
-    // github: string;
     Ivan: string;
     Anastasiya: string;
     Natallia: string;
   };
 } = {
   en: {
-    // github: 'GitHub:',
     Ivan: 'Ivan Martynjuk',
     Anastasiya: 'Anastasiya Alisenok',
     Natallia: 'Natallia Ivanyuk',
   },
   ru: {
-    // github: 'ГитХаб:',
     Ivan: 'Иван Мартынюк',
     Anastasiya: 'Анастасия Алисёнок',
     Natallia: 'Наталья Иванюк',
+  },
+  logins: {
+    Ivan: 'goodvalts',
+    Anastasiya: 'anastasiyaalisenok',
+    Natallia: 'whiterabbit8',
   },
 };
 
@@ -32,29 +34,52 @@ const Footer = (): JSX.Element => {
 
   return (
     <footer className={styles.footer}>
-      <Navbar data-bs-theme="dark">
-        <Container>
-          <Navbar.Brand>
-            <img src={git} width={20} alt="git-logo" />
-            <span className={styles.gitText}>GitHub:</span>
-          </Navbar.Brand>
-          <Nav className="ma-auto">
-            <Nav.Link href="https://github.com/goodvalts">
-              {textObj[lang].Ivan}
-            </Nav.Link>
-            <Nav.Link href="https://github.com/anastasiyaalisenok">
-              {textObj[lang].Anastasiya}
-            </Nav.Link>
-            <Nav.Link href="https://github.com/whiterabbit8">
-              {textObj[lang].Natallia}
-            </Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+      <div className={styles.members}>
+        <a
+          href="https://github.com/goodvalts"
+          target="_blank"
+          rel="noreferrer"
+          className={styles.member}
+        >
+          <img className={styles.gitLogo} src={git} alt="rss-logo" />
+          <span className={styles.gitText}>{textObj[lang].Ivan}</span>
+        </a>
+        <a
+          href="https://github.com/anastasiyaalisenok"
+          target="_blank"
+          rel="noreferrer"
+          className={styles.member}
+        >
+          <img className={styles.gitLogo} src={git} alt="rss-logo" />
+          <span className={styles.gitText}>{textObj[lang].Anastasiya}</span>
+        </a>
+        <a
+          href="https://github.com/whiterabbit8"
+          target="_blank"
+          rel="noreferrer"
+          className={styles.member}
+        >
+          <img className={styles.gitLogo} src={git} alt="rss-logo" />
+          <span className={styles.gitText}>{textObj[lang].Natallia}</span>
+        </a>
+      </div>
       <div className={styles.year}>2023 ©</div>
-      <div>
+      <div className={styles.rssContainer}>
+        <div className={`${styles.year} ${styles.yearMobile}`}>2023 ©</div>
         <a href="https://rs.school/react/">
-          <img className={styles.rssLogo} src={rss} alt="rss-logo" width={65} />
+          <img
+            className={styles.rssLogo}
+            onMouseEnter={(e): void => {
+              const img = e.target as HTMLImageElement;
+              img.src = rssHovered;
+            }}
+            onMouseLeave={(e): void => {
+              const img = e.target as HTMLImageElement;
+              img.src = rss;
+            }}
+            src={rss}
+            alt="rss-logo"
+          />
         </a>
       </div>
     </footer>

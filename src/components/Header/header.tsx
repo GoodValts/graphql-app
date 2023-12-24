@@ -64,10 +64,10 @@ const Header = (): JSX.Element => {
       }
     >
       <Stack direction="horizontal" gap={4}>
-        <img src={logo} className={styles.logo} alt="logo" />
-        <Link to="/">
-          <span className={styles.logoText}>{textObj[lang].project}</span>
-        </Link>
+        <a className={styles.logoContainer} href="/">
+          <img src={logo} className={styles.logo} alt="logo" />
+          <p className={styles.logoText}>{textObj[lang].project}</p>
+        </a>
       </Stack>
       <Stack
         direction="horizontal"
@@ -81,7 +81,7 @@ const Header = (): JSX.Element => {
               id={`radio-${ind}`}
               type="radio"
               name="radio"
-              variant="outline-info"
+              variant="outline-light"
               value={radio.value}
               size="lg"
               checked={radioValue === radio.value}
