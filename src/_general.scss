@@ -25,12 +25,12 @@ $sizeMobileHeader: 2rem; // 32px
 
 $mainColor: #20284d;
 
-$defaultTextColor: #33407A;
-$highlightedTextColor: #4759A8;
+$defaultTextColor: #33407a;
+$highlightedTextColor: #4759a8;
 $disabledTextColor: LightSlateGray;
 
 $defaultHeaderColor: #f8f9fa;
-$highlightedHeaderColor: #6495ED;
+$highlightedHeaderColor: #6495ed;
 
 // adaptive mixins
 
@@ -69,11 +69,11 @@ $highlightedHeaderColor: #6495ED;
   @include _tablet {
     font-size: $sizeMobileNormal;
     background-color: $defaultTextColor;
-    color:  #ffffff;
+    color: #ffffff;
 
     &:hover {
       background-color: $defaultTextColor;
-      color:  #ffffff;
+      color: #ffffff;
       border: 1px solid $defaultTextColor;
       scale: 1;
     }

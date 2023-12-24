@@ -70,8 +70,10 @@ const Footer = (): JSX.Element => {
           <img
             className={styles.rssLogo}
             onMouseEnter={(e): void => {
-              const img = e.target as HTMLImageElement;
-              img.src = rssHovered;
+              if (window.screen.width > 1279.98) {
+                const img = e.target as HTMLImageElement;
+                img.src = rssHovered;
+              }
             }}
             onMouseLeave={(e): void => {
               const img = e.target as HTMLImageElement;
