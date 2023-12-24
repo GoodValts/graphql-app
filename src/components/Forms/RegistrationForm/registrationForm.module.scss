@@ -10,12 +10,12 @@
   padding: 130px $marginDesktop;
   padding: $marginDesktop;
   padding-top: calc(90px + $marginDesktop);
-  
+
   @include _tablet {
     padding: $marginTablet;
     padding-top: calc(90px + $marginTablet);
   }
-  
+
   @include _mobile {
     padding: $marginMobile;
     padding-top: calc(90px + $marginMobile);
@@ -56,9 +56,9 @@
       scale: 1;
     }
   }
-  
+
   @include _mobile {
     font-size: $sizeMobileNormal;
-    margin-top: $marginMobile;    
+    margin-top: $marginMobile;
   }
 }
