@@ -19,11 +19,19 @@
       width: 54px;
       height: 54px;
       margin: 0 $marginDesktopDiv4;
+
+      @include _tablet {
+        margin: 0;
+      }
     }
   }
 
   & a {
     text-decoration: none;
+  }
+
+  @include _tablet {
+    padding: $marginDesktopDiv4 $marginDesktopDiv2;
   }
 }
 
@@ -35,6 +43,10 @@
   &:hover {
     cursor: pointer;
     scale: 0.98;
+
+    @include _tablet {
+      scale: 1;
+    }
   }
 }
 
@@ -42,6 +54,11 @@
   width: 70px;
   height: 70px;
   border-radius: 50%;
+
+  @include _tablet {
+    width: 55px;
+    height: 55px;
+  }
 }
 
 .logoText {
@@ -50,6 +67,22 @@
   font-weight: 700;
   margin: $marginDesktopDiv4;
   margin-top: $marginDesktopDiv2;
+
+  @include _tablet {
+    font-size: $sizeMobileBig;
+  }
+
+  @include _mobile {
+    font-size: $sizeMobileNormal;
+  }
+
+  @media (max-width: 639.98px) {
+    width: min-content;
+  }
+
+  @media (max-width: 479.98px) {
+    display: none;
+  }
 }
 
 .headerPanel {
@@ -57,12 +90,26 @@
   justify-content: space-between;
   align-items: center;
   min-width: 600px;
+
+  @include _tablet {
+    min-width: 400px;
+  }
+
+  @include _mobile {
+    min-width: 0px;
+    margin-left: $marginDesktopDiv2;
+    flex-grow: 1;
+  }
 }
 
 .languageContainer {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @include _mobile {
+    margin: 0 auto;
+  }
 }
 
 .toggleButton {
@@ -97,6 +144,11 @@
     border-radius: 0 $marginDesktopDiv4 $marginDesktopDiv4 0;
     border-right: 1px solid $defaultHeaderColor;
   }
+
+  @include _tablet {
+    font-size: $sizeMobileNormal;
+    width: 50px;
+  }
 }
 
 .nav {
@@ -106,20 +158,56 @@
 }
 
 .navButton {
-  @include _button;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: $defaultHeaderColor;
-  font-size: $sizeDesctopNormal;
-  padding: 3px $marginDesktopDiv2;
+  background-color: transparent;
+  font-size: $sizeDesctopNormal;  
+  border: 0;
   border: 1px solid $defaultHeaderColor;
   border-radius: $marginDesktopDiv4;
+  padding: 3px $marginDesktopDiv2;
+  margin: $marginDesktopDiv4;
 
   &:hover {
     cursor: pointer;
-    font-weight: 500;
     border: 1px solid $defaultHeaderColor;
     color: $mainColor;
     background-color: $defaultHeaderColor;
   }
+
+  @include _tablet {
+    font-size: $sizeMobileNormal;
+    color: $mainColor;
+    background-color: $defaultHeaderColor;
+    font-weight: 500;
+  }
+
+  @media (max-width: 639.98px) {
+    display: none;
+  }
 }
 
-// delete next
+.iconButton {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  color: transparent;
+  background-color: transparent;
+  border: 0;
+  padding: 0s;
+  margin: 24px;
+
+  @media (max-width: 639.98px) {
+    display: flex;
+  }
+
+  @media (max-width: 479.98px) {
+    margin: $marginDesktopDiv2;
+  }
+}
+
+.icon {
+  width: 35px;
+}

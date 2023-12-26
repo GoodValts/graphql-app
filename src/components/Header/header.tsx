@@ -4,6 +4,9 @@ import { useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { key } from 'localforage';
 import logo from '../../assets/img/logo3.png';
+import singInLogo from '../../assets/img/login.png';
+import singUpLogo from '../../assets/img/register.png';
+import singOutLogo from '../../assets/img/logout.png';
 import { auth, logout } from '../../firebase/firebase';
 import { AuthContext } from '../../controllers/appControllers';
 import styles from './header.module.scss';
@@ -92,17 +95,30 @@ const Header = (): JSX.Element => {
         </div>
         <nav>
           {user ? (
-            <button
-              type="button"
-              data-testid="graphql-btn"
-              className={styles.navButton}
-              onClick={(): void => {
-                logout();
-                navigate('/');
-              }}
-            >
-              {textObj[lang].signOut}
-            </button>
+            <>
+              <button
+                type="button"
+                data-testid="graphql-btn"
+                className={styles.navButton}
+                onClick={(): void => {
+                  logout();
+                  navigate('/');
+                }}
+              >
+                {textObj[lang].signOut}
+              </button>
+              <button
+                type="button"
+                data-testid="graphql-btn"
+                className={styles.iconButton}
+                onClick={(): void => {
+                  logout();
+                  navigate('/');
+                }}
+              >
+                <img className={styles.icon} alt="sign_out" src={singOutLogo} />
+              </button>
+            </>
           ) : (
             // <>
             //   <Nav
@@ -160,10 +176,24 @@ const Header = (): JSX.Element => {
               </button>
               <button
                 type="button"
+                className={styles.iconButton}
+                onClick={(): void => navigate('/login')}
+              >
+                <img className={styles.icon} alt="sign_in" src={singInLogo} />
+              </button>
+              <button
+                type="button"
                 className={styles.navButton}
                 onClick={(): void => navigate('/registration')}
               >
                 {textObj[lang].signUp}
+              </button>
+              <button
+                type="button"
+                className={styles.iconButton}
+                onClick={(): void => navigate('/registration')}
+              >
+                <img className={styles.icon} alt="sign_out" src={singUpLogo} />
               </button>
             </div>
           )}
