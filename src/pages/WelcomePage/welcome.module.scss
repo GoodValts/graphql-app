@@ -1,5 +1,87 @@
 @import '../../general';
 
-.exampleStyle {
+.mainHeader {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin: $marginDesktop;
+  margin-top: 0;
+}
+
+.paragraph {
+  font-size: 1.4rem;
+  text-align: center;
+  white-space: pre;
+  margin: 0;
+}
+
+.listBlock {
+  margin: $marginDesktopDiv2;
+}
+
+.header {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: $marginDesktopDiv2;
+}
+
+.list {
+  font-size: 1.4rem;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: $marginDesktopDiv4;
+}
+
+.linkBlock {
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.links {
+  display: block;
+  text-align: center;
+  color: $defaultTextColor;
+  font-size: 1.4rem;
+  text-decoration: underline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+
+  &:hover {
+    color: $highlightedTextColor;
+  }
+}
+
+.developersBlock {
+  margin: $marginDesktop $marginDesktopDiv4;
+}
+
+.developers {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.member {
+  margin: $marginDesktop;
+  width: 250px;
+}
+
+.photo {
+  width: 250px;
+  border-radius: 250px;
+}
+
+.icon {
+  width: 20px;
+  margin: 0 $marginDesktopDiv4;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  margin: $marginDesktopDiv2;
 }
