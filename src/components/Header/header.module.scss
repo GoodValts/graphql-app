@@ -2,61 +2,212 @@
 
 .header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: fixed;
   width: 100%;
   height: 90px;
-  padding: 20px 40px;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  background-color: #1b2240;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #ffffff;
-  transition: all 0.5s linear;
+  padding: $marginDesktopDiv4 $marginDesktop;
+  background-color: $mainColor;
+
   &.sticky {
     position: fixed;
     height: 70px;
-    font-size: 1.4rem;
-    transition: all 0.5s linear;
+    transition: all 0.3s linear;
+
+    & .logo {
+      width: 54px;
+      height: 54px;
+      margin: 0 $marginDesktopDiv4;
+
+      @include _tablet {
+        margin: 0;
+      }
+    }
   }
+
   & a {
     text-decoration: none;
   }
+
+  @include _tablet {
+    padding: $marginDesktopDiv4 $marginDesktopDiv2;
+  }
 }
 
-.container {
-  width: 25%;
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+    scale: 0.98;
+
+    @include _tablet {
+      scale: 1;
+    }
+  }
 }
 
 .logo {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-}
-.logoText {
-  color: #ffffff;
-  &:hover {
-    color: #d6d6d6;
-    transition: 0.3s;
+
+  @include _tablet {
+    width: 55px;
+    height: 55px;
   }
 }
-.nav {
+
+.logoText {
+  color: $defaultHeaderColor;
+  font-size: $sizeDesctopBig;
+  font-weight: 700;
+  margin: $marginDesktopDiv4;
+  margin-top: $marginDesktopDiv2;
+
+  @include _tablet {
+    font-size: $sizeMobileBig;
+  }
+
+  @include _mobile {
+    font-size: $sizeMobileNormal;
+  }
+
+  @media (max-width: 639.98px) {
+    width: min-content;
+  }
+
+  @media (max-width: 479.98px) {
+    display: none;
+  }
+}
+
+.headerPanel {
   display: flex;
-  width: 45%;
   justify-content: space-between;
   align-items: center;
-  margin-right: 10px;
-  & a {
-    text-decoration: none;
-    color: #0dcaf0;
-    border: 1px solid #0dcaf0;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 1.25rem;
-    &:hover {
-      color: #000000;
-      background-color: #0dcaf0;
-    }
+  min-width: 600px;
+
+  @include _tablet {
+    min-width: 400px;
   }
+
+  @include _mobile {
+    min-width: 0px;
+    margin-left: $marginDesktopDiv2;
+    flex-grow: 1;
+  }
+}
+
+.languageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include _mobile {
+    margin: 0 auto;
+  }
+}
+
+.toggleButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+  color: $defaultHeaderColor;
+  background-color: transparent;
+  font-size: $sizeDesctopNormal;
+  border: 0;
+  border: 1px solid $defaultHeaderColor;
+  border-right: 0px;
+  padding: 3px $marginDesktopDiv2;
+  margin: 0;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.selected {
+    color: $mainColor;
+    background-color: $defaultHeaderColor;
+    font-weight: 600;
+  }
+
+  &.first {
+    border-radius: $marginDesktopDiv4 0 0 $marginDesktopDiv4;
+  }
+
+  &.last {
+    border-radius: 0 $marginDesktopDiv4 $marginDesktopDiv4 0;
+    border-right: 1px solid $defaultHeaderColor;
+  }
+
+  @include _tablet {
+    font-size: $sizeMobileNormal;
+    width: 50px;
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $defaultHeaderColor;
+  background-color: transparent;
+  font-size: $sizeDesctopNormal;
+  border: 0;
+  border: 1px solid $defaultHeaderColor;
+  border-radius: $marginDesktopDiv4;
+  padding: 3px $marginDesktopDiv2;
+  margin: $marginDesktopDiv4;
+
+  &:hover {
+    cursor: pointer;
+    border: 1px solid $defaultHeaderColor;
+    color: $mainColor;
+    background-color: $defaultHeaderColor;
+  }
+
+  @include _tablet {
+    font-size: $sizeMobileNormal;
+    color: $mainColor;
+    background-color: $defaultHeaderColor;
+    font-weight: 500;
+  }
+
+  @media (max-width: 639.98px) {
+    display: none;
+  }
+}
+
+.iconButton {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  color: transparent;
+  background-color: transparent;
+  border: 0;
+  padding: 0s;
+  margin: 24px;
+
+  @media (max-width: 639.98px) {
+    display: flex;
+  }
+
+  @media (max-width: 479.98px) {
+    margin: $marginDesktopDiv2;
+  }
+}
+
+.icon {
+  width: 35px;
 }

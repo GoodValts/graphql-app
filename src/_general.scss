@@ -1,10 +1,38 @@
-$marginDesktop: 20px;
+// indents
+
+$marginDesktop: 2rem;
 $marginDesktopDiv2: calc($marginDesktop / 2);
 $marginDesktopDiv4: calc($marginDesktop / 4);
 
-$defaultTextColor: SteelBlue;
-$highlightedTextColor: CornflowerBlue;
+$marginTablet: 1rem;
+$marginTabletDiv2: calc($marginTablet / 2);
+
+$marginMobile: 0.5rem;
+
+// fonts
+
+$sizeDesctopSmall: 1rem; // 16px
+$sizeDesctopNormal: 1.4rem; // 22.4px
+$sizeDesctopBig: 2rem; // 32px
+$sizeDesctopHeader: 3rem; // 48px
+
+$sizeMobileSmall: 1rem; // 16px
+$sizeMobileNormal: 1.2rem; // 19.2px
+$sizeMobileBig: 1.5rem; // 24px
+$sizeMobileHeader: 2rem; // 32px
+
+// color scheme
+
+$mainColor: #20284d;
+
+$defaultTextColor: #33407a;
+$highlightedTextColor: #4759a8;
 $disabledTextColor: LightSlateGray;
+
+$defaultHeaderColor: #f8f9fa;
+$highlightedHeaderColor: #6495ed;
+
+// adaptive mixins
 
 @mixin _tablet {
   @media (max-width: 1279.98px) {
@@ -25,7 +53,6 @@ $disabledTextColor: LightSlateGray;
   color: $defaultTextColor;
   background-color: transparent;
   border: 0;
-  font-size: 1.2rem;
   border: 1px solid $defaultTextColor;
   border-radius: $marginDesktopDiv2;
   padding: $marginDesktopDiv2 $marginDesktop;
@@ -34,7 +61,25 @@ $disabledTextColor: LightSlateGray;
   &:hover {
     cursor: pointer;
     border: 1px solid $highlightedTextColor;
-    color: $highlightedTextColor;
+    color: #ffffff;
+    background-color: $highlightedTextColor;
     scale: 0.95;
+  }
+
+  @include _tablet {
+    font-size: $sizeMobileNormal;
+    background-color: $defaultTextColor;
+    color: #ffffff;
+
+    &:hover {
+      background-color: $defaultTextColor;
+      color: #ffffff;
+      border: 1px solid $defaultTextColor;
+      scale: 1;
+    }
+  }
+
+  @include _mobile {
+    padding: $marginMobile $marginDesktop;
   }
 }

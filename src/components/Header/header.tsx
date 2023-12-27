@@ -2,14 +2,18 @@ import { Nav, Stack, Button, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import styles from './header.module.scss';
-import logo from '../../assets/img/logo.png';
+import { key } from 'localforage';
+import logo from '../../assets/img/logo3.png';
+import singInLogo from '../../assets/img/login.png';
+import singUpLogo from '../../assets/img/register.png';
+import singOutLogo from '../../assets/img/logout.png';
 import { auth, logout } from '../../firebase/firebase';
 import { AuthContext } from '../../controllers/appControllers';
+import styles from './header.module.scss';
 
 let scroll = 0;
 
-const radios = [
+const radios: { name: string; value: string }[] = [
   { name: 'En', value: 'en' },
   { name: 'Рус', value: 'ru' },
 ];
@@ -37,13 +41,12 @@ const textObj: {
 };
 
 const Header = (): JSX.Element => {
+  const navigate = useNavigate();
+
   const { lang, setLang } = useContext(AuthContext);
-  const [radioValue, setRadioValue] = useState(
-    localStorage.getItem('lang') || 'en'
-  );
   const [scrollWindow, setScrollWindow] = useState(false);
   const [user] = useAuthState(auth);
-  const navigate = useNavigate();
+
   useEffect(() => {
     window.onscroll = (): void => {
       scroll = window.scrollY;
@@ -54,97 +57,148 @@ const Header = (): JSX.Element => {
       }
     };
   }, []);
+
   return (
     <header
       className={
         scrollWindow ? `${styles.header} ${styles.sticky}` : styles.header
       }
     >
-      <Stack direction="horizontal" gap={4}>
+      <a className={styles.logoContainer} href="/">
         <img src={logo} className={styles.logo} alt="logo" />
-        <Link to="/">
-          <span className={styles.logoText}>{textObj[lang].project}</span>
-        </Link>
-      </Stack>
-      <Stack
-        direction="horizontal"
-        gap={2}
-        className={`ms-auto ${styles.container}`}
-      >
-        <ButtonGroup>
-          {radios.map((radio, ind) => (
-            <ToggleButton
+        <p className={styles.logoText}>{textObj[lang].project}</p>
+      </a>
+
+      <div className={styles.headerPanel}>
+        <div className={styles.languageContainer}>
+          {radios.map((radio, id) => (
+            <button
               key={radio.value}
-              id={`radio-${ind}`}
-              type="radio"
-              name="radio"
-              variant="outline-info"
-              value={radio.value}
-              size="lg"
-              checked={radioValue === radio.value}
-              data-testid={radio.value}
-              onChange={(e): void => {
-                setRadioValue(e.currentTarget.value);
-                const selectedLang = radios
-                  .find((item) => item.value === e.currentTarget.value)!
-                  .value.toLowerCase();
-                setLang(selectedLang);
-                localStorage.setItem('lang', selectedLang);
+              type="button"
+              className={`
+              ${styles.toggleButton}
+              ${id === 0 ? styles.first : ''}
+              ${id === radios.length - 1 ? styles.last : ''}
+              ${radio.value === lang ? styles.selected : ''}
+            `
+                .replace(/\n/g, '')
+                .replace(/ {2,}/g, ' ')
+                .trim()}
+              onClick={(): void => {
+                setLang(radio.value);
+                localStorage.setItem('lang', radio.value);
               }}
             >
               {radio.name}
-            </ToggleButton>
+            </button>
           ))}
-        </ButtonGroup>
-        {user ? (
-          <>
-            <Nav
-              className={styles.nav}
-              fill
-              variant="pills"
-              defaultActiveKey="/"
-            >
-              <Nav.Item>
-                <Nav.Link
-                  // href="/graphQL"
-                  eventKey="graphQL"
-                  data-testid="graphql-btn"
-                  onClick={(): void => navigate('/graphQL')}
-                >
-                  GraphQL
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
-            <Button
-              variant="outline-info"
-              size="lg"
-              onClick={(): void => {
-                logout();
-                navigate('/');
-              }}
-            >
-              {textObj[lang].signOut}
-            </Button>
-          </>
-        ) : (
-          <Stack direction="horizontal" gap={2} className="ms-auto">
-            <Button
-              variant="outline-info"
-              size="lg"
-              onClick={(): void => navigate('/login')}
-            >
-              {textObj[lang].signIn}
-            </Button>
-            <Button
-              variant="outline-info"
-              size="lg"
-              onClick={(): void => navigate('/registration')}
-            >
-              {textObj[lang].signUp}
-            </Button>
-          </Stack>
-        )}
-      </Stack>
+        </div>
+        <nav>
+          {user ? (
+            <>
+              <button
+                type="button"
+                data-testid="graphql-btn"
+                className={styles.navButton}
+                onClick={(): void => {
+                  logout();
+                  navigate('/');
+                }}
+              >
+                {textObj[lang].signOut}
+              </button>
+              <button
+                type="button"
+                data-testid="graphql-btn"
+                className={styles.iconButton}
+                onClick={(): void => {
+                  logout();
+                  navigate('/');
+                }}
+              >
+                <img className={styles.icon} alt="sign_out" src={singOutLogo} />
+              </button>
+            </>
+          ) : (
+            // <>
+            //   <Nav
+            //     className={styles.nav}
+            //     fill
+            //     variant="pills"
+            //     defaultActiveKey="/"
+            //   >
+            //     <Nav.Item>
+            //       <Nav.Link
+            //         // href="/graphQL"
+            //         eventKey="graphQL"
+            //         data-testid="graphql-btn"
+            //         onClick={(): void => navigate('/graphQL')}
+            //       >
+            //         GraphQL
+            //       </Nav.Link>
+            //     </Nav.Item>
+            //   </Nav>
+            //   <Button
+            //     variant="outline-info"
+            //     size="lg"
+            //     onClick={(): void => {
+            //       logout();
+            //       navigate('/');
+            //     }}
+            //   >
+            //     {textObj[lang].signOut}
+            //   </Button>
+            // </>
+
+            // <Stack direction="horizontal" gap={2} className="ms-auto">
+            //   <Button
+            //     variant="outline-info"
+            //     size="lg"
+            //     onClick={(): void => navigate('/login')}
+            //   >
+            //     {textObj[lang].signIn}
+            //   </Button>
+            //   <Button
+            //     variant="outline-info"
+            //     size="lg"
+            //     onClick={(): void => navigate('/registration')}
+            //   >
+            //     {textObj[lang].signUp}
+            //   </Button>
+            // </Stack>
+            <div className={styles.nav}>
+              <button
+                type="button"
+                className={styles.navButton}
+                onClick={(): void => navigate('/login')}
+              >
+                {textObj[lang].signIn}
+              </button>
+              <button
+                type="button"
+                className={styles.iconButton}
+                onClick={(): void => navigate('/login')}
+              >
+                <img className={styles.icon} alt="sign_in" src={singInLogo} />
+              </button>
+              <button
+                type="button"
+                className={styles.navButton}
+                onClick={(): void => navigate('/registration')}
+              >
+                {textObj[lang].signUp}
+              </button>
+              <button
+                type="button"
+                className={styles.iconButton}
+                onClick={(): void => navigate('/registration')}
+              >
+                <img className={styles.icon} alt="sign_out" src={singUpLogo} />
+              </button>
+            </div>
+          )}
+        </nav>
+      </div>
     </header>
   );
 };

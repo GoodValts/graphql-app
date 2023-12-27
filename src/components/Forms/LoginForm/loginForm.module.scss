@@ -5,23 +5,43 @@
   width: 90vw;
   min-width: 260px;
   max-width: 400px;
-  border-radius: $marginDesktopDiv2;
   margin: 0 auto;
   padding: $marginDesktop;
+  padding-top: calc(90px + $marginDesktop);
+
+  @include _tablet {
+    padding: $marginTablet;
+    padding-top: calc(90px + $marginTablet);
+  }
+
+  @include _mobile {
+    padding: $marginMobile;
+    padding-top: calc(90px + $marginMobile);
+  }
 }
 
 .header {
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: $sizeDesctopBig;
   text-align: center;
   color: $defaultTextColor;
   margin-bottom: $marginDesktop;
+
+  @include _tablet {
+    font-size: $sizeMobileBig;
+  }
+
+  @include _mobile {
+    font-size: $sizeMobileBig;
+    margin-bottom: $marginMobile;
+  }
 }
 
 .button {
   @include _button;
   margin: $marginDesktopDiv2 auto;
-  margin-bottom: 30px;
+  margin-top: $marginDesktop;
+  font-size: $sizeDesctopNormal;
 
   &Disabled {
     color: $disabledTextColor;
@@ -31,25 +51,26 @@
       cursor: not-allowed;
       color: $disabledTextColor;
       border: 1px solid $disabledTextColor;
+      background-color: transparent;
       scale: 1;
     }
+
+    @include _tablet {
+      background-color: $disabledTextColor;
+      color: #ffffff;
+
+      &:hover {
+        cursor: not-allowed;
+        border: 1px solid $disabledTextColor;
+        background-color: $disabledTextColor;
+        color: #ffffff;
+        scale: 1;
+      }
+    }
   }
-}
 
-.paragraph {
-  color: $defaultTextColor;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.4rem;
-  text-align: center;
-}
-
-.link {
-  color: $defaultTextColor;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.4rem;
-  text-align: center;
-
-  &:hover {
-    color: $highlightedTextColor;
+  @include _mobile {
+    font-size: $sizeMobileNormal;
+    margin-top: $marginMobile;
   }
 }

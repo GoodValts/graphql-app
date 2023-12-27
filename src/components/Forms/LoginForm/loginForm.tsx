@@ -20,8 +20,6 @@ export type LoginFormValues = {
 };
 
 const LoginForm = (): JSX.Element => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [user] = useAuthState(auth);
   const { lang } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -43,8 +41,8 @@ const LoginForm = (): JSX.Element => {
     }
   }, [user]);
 
-  const submitForm = (): void => {
-    signInWithEmailAndPassword(auth, email, password)
+  const submitForm = (d: LoginFormValues): void => {
+    signInWithEmailAndPassword(auth, d.email, d.password)
       .then(() => {
         getSuccessMessage(lang);
       })
@@ -54,7 +52,7 @@ const LoginForm = (): JSX.Element => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(submitForm)}>
+    <form className={styles.form} onSubmit={handleSubmit((d) => submitForm(d))}>
       <h2 className={styles.header}>{textObj[lang].header}</h2>
       <Input<LoginFormValues>
         styles={styles.input}
@@ -62,7 +60,6 @@ const LoginForm = (): JSX.Element => {
         name="email"
         errors={errors.email}
         register={register}
-        setState={setEmail}
         required
       />
       <Input<LoginFormValues>
@@ -70,7 +67,6 @@ const LoginForm = (): JSX.Element => {
         name="password"
         errors={errors.password}
         register={register}
-        setState={setPassword}
         type="password"
         required
       />
