@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../redux/hooks';
-import { selectLanguage } from '../../redux/store';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { AuthContext } from '../../controllers/appControllers';
+import { auth } from '../../firebase/firebase';
 import styles from './welcome.module.scss';
 import IvanPhoto from '../../assets/img/IvanPhoto.jpg';
 import AnastasiyaPhoto from '../../assets/img/AnastasiyaPhoto.jpg';
@@ -130,8 +130,8 @@ const textObj: {
 };
 
 const WelcomePage = (): JSX.Element => {
-  const lang = useAppSelector(selectLanguage);
-  const { isAuth /* ,  lang */ } = useContext(AuthContext);
+  const { lang } = useContext(AuthContext);
+  const [user] = useAuthState(auth);
   const navigate = useNavigate();
   return (
     <>
@@ -149,9 +149,13 @@ const WelcomePage = (): JSX.Element => {
           })}
       </div>
       <div className={styles.linkBlock}>
-        {isAuth ? (
+        {user ? (
           <>
-            <button className={styles.links} type="button">
+            <button
+              className={styles.links}
+              type="button"
+              onClick={(): void => navigate('/graphQL')}
+            >
               {textObj[lang].links.linkMainPage}
             </button>
             <p className={styles.paragraph}>
