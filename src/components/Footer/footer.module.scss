@@ -66,23 +66,23 @@
 
 .gitText {
   display: block;
-  font-size: $sizeDesctopNormal;
+  font-size: $sizeDesktopNormal;
 
   @include _tablet {
-    font-size: $sizeDesctopSmall;
+    font-size: $sizeDesktopSmall;
   }
 }
 
 .year {
   display: block;
   color: $defaultHeaderColor;
-  font-size: $sizeDesctopNormal;
+  font-size: $sizeDesktopNormal;
   white-space: nowrap;
   text-align: center;
   margin: $marginDesktopDiv4;
 
   @include _tablet {
-    font-size: $sizeDesctopSmall;
+    font-size: $sizeDesktopSmall;
   }
 
   @include _mobile {
