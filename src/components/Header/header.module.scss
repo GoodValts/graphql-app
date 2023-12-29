@@ -196,8 +196,9 @@
   color: transparent;
   background-color: transparent;
   border: 0;
-  padding: 0s;
+  padding: 0;
   margin: 24px;
+  margin-right: 0;
 
   @media (max-width: 639.98px) {
     display: flex;
@@ -205,6 +206,7 @@
 
   @media (max-width: 479.98px) {
     margin: $marginDesktopDiv2;
+    margin-right: 0;
   }
 }
 
