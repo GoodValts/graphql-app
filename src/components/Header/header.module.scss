@@ -9,6 +9,7 @@
   height: 90px;
   padding: $marginDesktopDiv4 $marginDesktop;
   background-color: $mainColor;
+  z-index: 1;
 
   &.sticky {
     position: fixed;
@@ -63,7 +64,7 @@
 
 .logoText {
   color: $defaultHeaderColor;
-  font-size: $sizeDesctopBig;
+  font-size: $sizeDesktopBig;
   font-weight: 700;
   margin: $marginDesktopDiv4;
   margin-top: $marginDesktopDiv2;
@@ -119,7 +120,7 @@
   width: 55px;
   color: $defaultHeaderColor;
   background-color: transparent;
-  font-size: $sizeDesctopNormal;
+  font-size: $sizeDesktopNormal;
   border: 0;
   border: 1px solid $defaultHeaderColor;
   border-right: 0px;
@@ -163,7 +164,7 @@
   align-items: center;
   color: $defaultHeaderColor;
   background-color: transparent;
-  font-size: $sizeDesctopNormal;
+  font-size: $sizeDesktopNormal;
   border: 0;
   border: 1px solid $defaultHeaderColor;
   border-radius: $marginDesktopDiv4;

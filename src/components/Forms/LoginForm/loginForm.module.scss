@@ -22,7 +22,7 @@
 
 .header {
   font-weight: 700;
-  font-size: $sizeDesctopBig;
+  font-size: $sizeDesktopBig;
   text-align: center;
   color: $defaultTextColor;
   margin-bottom: $marginDesktop;
@@ -41,7 +41,7 @@
   @include _button;
   margin: $marginDesktopDiv2 auto;
   margin-top: $marginDesktop;
-  font-size: $sizeDesctopNormal;
+  font-size: $sizeDesktopNormal;
 
   &Disabled {
     color: $disabledTextColor;

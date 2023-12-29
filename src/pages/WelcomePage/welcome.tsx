@@ -17,6 +17,7 @@ interface Developer {
   surname: string;
   city: string;
   role: string;
+  cvLink?: string;
   gitHub?: string;
   telegram?: string;
 }
@@ -24,7 +25,7 @@ interface Developer {
 const textObj: {
   [key: string]: {
     header: string;
-    aboutProject: string;
+    aboutProject: { description: string; link: string };
     stack: { header: string; techs?: string[] };
     links: {
       linkSignIn: string;
@@ -37,8 +38,10 @@ const textObj: {
 } = {
   en: {
     header: 'Phoenix GraphQL',
-    aboutProject:
-      'Phoenix GraphQL is an app for the final task of the React course at Rolling Scopes School.',
+    aboutProject: {
+      description: 'is an app for the final task of the',
+      link: 'React course at Rolling Scopes School',
+    },
     stack: {
       header: 'Stack:',
       techs: [
@@ -68,6 +71,7 @@ const textObj: {
           role: 'Team Lead',
           gitHub: 'GoodValts',
           telegram: '@szczuczynszczyna',
+          cvLink: 'https://goodvalts.github.io/rsschool-cv/',
         },
         {
           name: 'Anastasiya',
@@ -77,6 +81,7 @@ const textObj: {
           role: 'Frontend developer',
           gitHub: 'AnastasiyaAlisenok',
           telegram: '@anastasiya_alisenok',
+          cvLink: 'https://anastasiyaalisenok-portfolio.netlify.app/',
         },
         {
           name: 'Natallia',
@@ -86,14 +91,17 @@ const textObj: {
           role: 'Frontend developer',
           gitHub: 'whiterabbit8',
           telegram: '@nat_viii',
+          cvLink: 'https://whiterabbit8.github.io/rsschool-cv/',
         },
       ],
     },
   },
   ru: {
     header: 'Феникс GraphQL',
-    aboutProject:
-      'Феникс GraphQL — приложение для финального задания курса по React в Rolling Scopes School.',
+    aboutProject: {
+      description: '— приложение для финального задания',
+      link: 'курса по React в Rolling Scopes School',
+    },
     stack: {
       header: 'Технологии:',
     },
@@ -135,9 +143,24 @@ const WelcomePage = (): JSX.Element => {
   const navigate = useNavigate();
   return (
     <>
-      <header className={styles.mainHeader}>{textObj[lang].header}</header>
-      <p className={styles.paragraph}>{textObj[lang].aboutProject}</p>
-      <div className={styles.listBlock}>
+      <div className={styles.topMargin} />
+      <h2 className={styles.mainHeader}>{textObj[lang].header}</h2>
+      <div className={styles.aboutContainer}>
+        <p className={styles.paragraph}>
+          <strong>{textObj[lang].header}</strong>{' '}
+          {textObj[lang].aboutProject.description}{' '}
+          <a
+            className={styles.links}
+            href="https://github.com/rolling-scopes-school/tasks/blob/master/react/README.md"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {textObj[lang].aboutProject.link}
+          </a>
+          .
+        </p>
+      </div>
+      <section className={styles.techs}>
         <h3 className={styles.header}>{textObj[lang].stack.header}</h3>
         {textObj.en.stack.techs &&
           textObj.en.stack.techs.map((el) => {
@@ -147,64 +170,63 @@ const WelcomePage = (): JSX.Element => {
               </p>
             );
           })}
-      </div>
-      <div className={styles.linkBlock}>
-        {user ? (
-          <>
-            <button
-              className={styles.links}
-              type="button"
-              onClick={(): void => navigate('/graphQL')}
-            >
-              {textObj[lang].links.linkMainPage}
-            </button>
+        <div className={styles.linkBlock}>
+          {user ? (
             <p className={styles.paragraph}>
+              <button
+                className={styles.links}
+                type="button"
+                onClick={(): void => navigate('/graphQL')}
+              >
+                {textObj[lang].links.linkMainPage}
+              </button>
               {textObj[lang].links.linkParagraph}
             </p>
-          </>
-        ) : (
-          <>
-            <button
-              className={styles.links}
-              type="button"
-              onClick={(): void => navigate('/login')}
-            >
-              {textObj[lang].links.linkSignIn}
-            </button>
-            <p className={styles.paragraph}> / </p>
-            <button
-              className={styles.links}
-              type="button"
-              onClick={(): void => navigate('/registration')}
-            >
-              {textObj[lang].links.linkSignUp}
-            </button>
+          ) : (
             <p className={styles.paragraph}>
-              {textObj[lang].links.linkParagraph}
+              {' '}
+              <button
+                className={styles.links}
+                type="button"
+                onClick={(): void => navigate('/login')}
+              >
+                {textObj[lang].links.linkSignIn}
+              </button>
+              {' / '}
+              <button
+                className={styles.links}
+                type="button"
+                onClick={(): void => navigate('/registration')}
+              >
+                {textObj[lang].links.linkSignUp}
+              </button>{' '}
+              {textObj[lang].links.linkParagraph}{' '}
             </p>
-          </>
-        )}
-      </div>
-
-      <div className={styles.developersBlock}>
+          )}
+        </div>
+      </section>
+      <section className={styles.developersBlock}>
         <h3 className={styles.header}>{textObj[lang].developers.header}</h3>
         <div className={styles.developers}>
           {textObj[lang].developers.members.map(
             (el: Developer, index: number) => {
-              // console.log(el.surname);
-              console.log(index);
-              console.log(textObj.en.developers.members[index]);
               return (
                 <div key={el.surname} className={styles.member}>
-                  <img
-                    className={styles.photo}
-                    src={textObj.en.developers.members[index].photo}
-                    alt={`${textObj.en.developers.members[index].name}_photo`}
-                  />
-                  <p className={styles.mainHeader}>
-                    {`${el.name} ${el.surname}`}
+                  <a
+                    href={textObj.en.developers.members[index].cvLink}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      className={styles.photo}
+                      src={textObj.en.developers.members[index].photo}
+                      alt={`${textObj.en.developers.members[index].name}_photo`}
+                    />
+                  </a>
+                  <p className={styles.header}>{`${el.name} ${el.surname}`}</p>
+                  <p className={styles.paragraph} style={{ fontWeight: '700' }}>
+                    {el.role}
                   </p>
-                  <p className={styles.header}>{el.role}</p>
                   <a
                     href={`https://github.com/${textObj.en.developers.members[index].gitHub}`}
                     target="_blank"
@@ -243,7 +265,7 @@ const WelcomePage = (): JSX.Element => {
             }
           )}
         </div>
-      </div>
+      </section>
     </>
   );
 };
