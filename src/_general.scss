@@ -58,13 +58,9 @@ $highlightedHeaderColor: #6495ed;
   padding: $marginDesktopDiv2 $marginDesktop;
   margin: $marginDesktopDiv4;
 
-  &:hover {
-    cursor: pointer;
-    border: 1px solid $highlightedTextColor;
-    color: #ffffff;
-    background-color: $highlightedTextColor;
-    scale: 0.95;
-  }
+  border-radius: $marginDesktopDiv2;
+  padding: $marginDesktopDiv2 $marginDesktop;
+  margin: $marginDesktopDiv4;
 
   @include _tablet {
     font-size: $sizeMobileNormal;
@@ -81,5 +77,34 @@ $highlightedHeaderColor: #6495ed;
 
   @include _mobile {
     padding: $marginMobile $marginDesktop;
+  }
+}
+
+@mixin _graphQLButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $sizeDesktopNormal;
+  color: $defaultTextColor;
+  background-color: transparent;
+  border: 0;
+  border: 1px solid $defaultTextColor;
+  border-radius: $marginDesktopDiv4;
+  padding: 0 $marginDesktopDiv4;
+  margin: $marginDesktopDiv4;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background-color: $defaultTextColor;
+    color: $defaultHeaderColor;
+    border: 1px solid $defaultTextColor;
+    scale: .98;
+  }
+
+  &.active {
+    background-color: rgba($color: $defaultTextColor, $alpha: .25);
   }
 }

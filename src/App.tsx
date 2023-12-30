@@ -4,12 +4,14 @@ import {
   Route,
   createRoutesFromElements,
 } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import NotFoundPage from './pages/404/404';
 import GraphQLPage from './pages/GraphQL/graphQL';
 import RegistrationPage from './pages/RegistrationPage/registration';
 import WelcomePage from './pages/WelcomePage/welcome';
 import LayoutPage from './pages/LayoutPage/LayoutPage';
 import LoginPage from './pages/LoginPage/login';
+import { store } from './redux/store';
 import './App.scss';
 
 const router = createBrowserRouter(
@@ -25,7 +27,11 @@ const router = createBrowserRouter(
 );
 
 const App = (): JSX.Element => {
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 };
 
 export default App;

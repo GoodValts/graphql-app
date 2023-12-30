@@ -1,6 +1,7 @@
 interface GraphQLLangObjType {
   prettify: string;
-  submit: string;
+  documentation: string;
+  reset: string;
   urlPlaceholder: string;
   queryPlaceholder: string;
 }
@@ -12,13 +13,15 @@ interface GraphQLTextObjType {
 const GraphQLtextObj: GraphQLTextObjType = {
   en: {
     prettify: 'Prettify',
-    submit: 'Submit',
+    reset: 'Reset',
+    documentation: 'Documentation',
     urlPlaceholder: 'Enter URL',
     queryPlaceholder: 'Enter query',
   },
   ru: {
     prettify: 'Форматировать',
-    submit: 'Подтвердить',
+    reset: 'Сбросить',
+    documentation: 'Документация',
     urlPlaceholder: 'Введите URL',
     queryPlaceholder: 'Введите запрос',
   },
