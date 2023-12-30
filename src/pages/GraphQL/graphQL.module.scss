@@ -42,7 +42,7 @@
   outline: none;
 
   &.error {
-    background-color: rgba($color: crimson, $alpha: .25)
+    background-color: rgba($color: crimson, $alpha: 0.25);
   }
 
   @include _tablet {
@@ -74,7 +74,6 @@
 .docs {
   margin: $marginDesktop;
   font-size: $sizeDesktopNormal;
-  
 }
 
 .query {
@@ -83,7 +82,7 @@
   grid-template-rows: auto 1fr;
   min-height: 100%;
   margin-left: $marginDesktopDiv2;
-  border-right: 1px solid rgba($color: $disabledTextColor, $alpha: .3);
+  border-right: 1px solid rgba($color: $disabledTextColor, $alpha: 0.3);
 
   @include _mobile {
     margin-left: 0;
@@ -109,9 +108,9 @@
   font-size: $sizeDesktopSmall;
   border: 0;
   padding: $marginDesktopDiv4 $marginDesktopDiv2;
-  
+
   min-width: 200px;
-  
+
   @include _mobile {
     padding: $marginDesktopDiv4;
   }

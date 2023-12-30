@@ -101,10 +101,10 @@ $highlightedHeaderColor: #6495ed;
     background-color: $defaultTextColor;
     color: $defaultHeaderColor;
     border: 1px solid $defaultTextColor;
-    scale: .98;
+    scale: 0.98;
   }
 
   &.active {
-    background-color: rgba($color: $defaultTextColor, $alpha: .25);
+    background-color: rgba($color: $defaultTextColor, $alpha: 0.25);
   }
 }
