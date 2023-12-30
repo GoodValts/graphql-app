@@ -7,6 +7,7 @@ import logo from '../../assets/img/logo3.png';
 import singInLogo from '../../assets/img/login.png';
 import singUpLogo from '../../assets/img/register.png';
 import singOutLogo from '../../assets/img/logout.png';
+import graphQLLogo from '../../assets/img/graphQL.png';
 import { auth, logout } from '../../firebase/firebase';
 import { AuthContext } from '../../controllers/appControllers';
 import styles from './header.module.scss';
@@ -95,10 +96,24 @@ const Header = (): JSX.Element => {
         </div>
         <nav>
           {user ? (
-            <>
+            <div className={styles.nav}>
               <button
                 type="button"
+                className={styles.navButton}
+                onClick={(): void => navigate('/graphQL')}
                 data-testid="graphql-btn"
+              >
+                GraphQl
+              </button>
+              <button
+                type="button"
+                className={styles.iconButton}
+                onClick={(): void => navigate('/graphQL')}
+              >
+                <img className={styles.icon} alt="sign_out" src={graphQLLogo} />
+              </button>
+              <button
+                type="button"
                 className={styles.navButton}
                 onClick={(): void => {
                   logout();
@@ -109,7 +124,6 @@ const Header = (): JSX.Element => {
               </button>
               <button
                 type="button"
-                data-testid="graphql-btn"
                 className={styles.iconButton}
                 onClick={(): void => {
                   logout();
@@ -118,7 +132,7 @@ const Header = (): JSX.Element => {
               >
                 <img className={styles.icon} alt="sign_out" src={singOutLogo} />
               </button>
-            </>
+            </div>
           ) : (
             // <>
             //   <Nav
