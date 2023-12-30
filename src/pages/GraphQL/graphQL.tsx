@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import styles from './graphQL.module.scss';
 import { AuthContext } from '../../controllers/appControllers';
-import GrapgQLtextObj from './langData';
+import GraphQLtextObj from './langData';
 
 interface ResponseData {
   data: undefined;
@@ -41,24 +41,24 @@ const GraphQLPage = (): JSX.Element => {
     <div className={styles.wrapper}>
       <form className={styles.header}>
         <button className={styles.button} type="button">
-          {GrapgQLtextObj[lang].prettify}
+          {GraphQLtextObj[lang].prettify}
         </button>
         <input
           className={styles.url_input}
           type="url"
-          placeholder={GrapgQLtextObj[lang].urlPlaceholder}
+          placeholder={GraphQLtextObj[lang].urlPlaceholder}
           value={url}
           onChange={(e): void => setUrl(e.target.value)}
         />
         <button className={styles.button} type="submit">
-          {GrapgQLtextObj[lang].submit}
+          {GraphQLtextObj[lang].submit}
         </button>
       </form>
       <div className={styles.query_wrapper}>
         <div className={styles.query}>
           <textarea
             className={styles.query_input}
-            placeholder={GrapgQLtextObj[lang].queryPlaceholder}
+            placeholder={GraphQLtextObj[lang].queryPlaceholder}
             value={query}
             onChange={(e): void => setQuery(e.target.value)}
           />

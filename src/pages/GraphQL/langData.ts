@@ -1,15 +1,15 @@
-interface GrapgQLLangObjType {
+interface GraphQLLangObjType {
   prettify: string;
   submit: string;
   urlPlaceholder: string;
   queryPlaceholder: string;
 }
 
-interface GrapgQLTextObjType {
-  [key: string]: GrapgQLLangObjType;
+interface GraphQLTextObjType {
+  [key: string]: GraphQLLangObjType;
 }
 
-const GrapgQLtextObj: GrapgQLTextObjType = {
+const GraphQLtextObj: GraphQLTextObjType = {
   en: {
     prettify: 'Prettify',
     submit: 'Submit',
@@ -24,4 +24,4 @@ const GrapgQLtextObj: GrapgQLTextObjType = {
   },
 };
 
-export default GrapgQLtextObj;
+export default GraphQLtextObj;
