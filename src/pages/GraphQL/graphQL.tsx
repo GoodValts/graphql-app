@@ -1,23 +1,30 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './graphQL.module.scss';
 import { AuthContext } from '../../controllers/appControllers';
-import GrapgQLtextObj from './langData';
+import GraphQLtextObj from './langData';
 
 interface ResponseData {
-  data: undefined;
+  data?: unknown;
+  errors?: unknown;
 }
 
-const GraphQLPage = (): JSX.Element => {
-  const [url, setUrl] = useState('https://rickandmortyapi.com/graphql');
-  const [query, setQuery] = useState(`query {
+const exampleUrl = 'https://rickandmortyapi.com/graphql';
+const examleQuery = `query {
     characters {
       results {
         name
         status
       }
     }
-  }`);
+  }
+`;
+
+const GraphQLPage = (): JSX.Element => {
+  const [url, setUrl] = useState(exampleUrl);
+  const [query, setQuery] = useState(examleQuery);
   const [response, setResponse] = useState('');
+  const [statusColor, setStatusColor] = useState('status_loading');
+  const [statusMessage, setStatusMessage] = useState('');
   const { lang } = useContext(AuthContext);
 
   const makeRequest = async (): Promise<ResponseData> => {
@@ -28,37 +35,59 @@ const GraphQLPage = (): JSX.Element => {
       },
       body: JSON.stringify({ query }),
     });
+    // console.log(res.json());
+
     return res.json();
   };
 
+  useEffect(() => {
+    setStatusColor('status_loading');
+    setStatusMessage('');
+    makeRequest().then(
+      () => {
+        setStatusColor('status_success');
+      },
+      () => {
+        setStatusColor('status_error');
+        setStatusMessage('Server cannot be reached');
+      }
+    );
+  }, [url]);
+
   const printData = (): void => {
     makeRequest().then((res): void => {
-      setResponse(JSON.stringify(res.data, undefined, 2));
+      if (res.data) {
+        setResponse(JSON.stringify(res.data, undefined, 2));
+      } else if (res.errors) {
+        setResponse(JSON.stringify(res.errors, undefined, 2));
+      }
     });
   };
 
   return (
     <div className={styles.wrapper}>
-      <form className={styles.header}>
+      <div className={styles.header}>
         <button className={styles.button} type="button">
-          {GrapgQLtextObj[lang].prettify}
+          {GraphQLtextObj[lang].prettify}
         </button>
         <input
+          name="url"
           className={styles.url_input}
           type="url"
-          placeholder={GrapgQLtextObj[lang].urlPlaceholder}
+          placeholder={GraphQLtextObj[lang].urlPlaceholder}
           value={url}
           onChange={(e): void => setUrl(e.target.value)}
         />
-        <button className={styles.button} type="submit">
-          {GrapgQLtextObj[lang].submit}
-        </button>
-      </form>
+        <label htmlFor="url" className={styles.status_message}>
+          {statusMessage}
+        </label>
+        <div className={styles[statusColor]} />
+      </div>
       <div className={styles.query_wrapper}>
         <div className={styles.query}>
           <textarea
             className={styles.query_input}
-            placeholder={GrapgQLtextObj[lang].queryPlaceholder}
+            placeholder={GraphQLtextObj[lang].queryPlaceholder}
             value={query}
             onChange={(e): void => setQuery(e.target.value)}
           />
