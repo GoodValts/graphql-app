@@ -25,6 +25,7 @@ const GraphQLPage = (): JSX.Element => {
   const [response, setResponse] = useState('');
   const [statusColor, setStatusColor] = useState('status_loading');
   const [statusMessage, setStatusMessage] = useState('');
+  const [isLoading, setLoading] = useState(false);
   const { lang } = useContext(AuthContext);
 
   const makeRequest = async (): Promise<ResponseData> => {
@@ -36,7 +37,6 @@ const GraphQLPage = (): JSX.Element => {
       body: JSON.stringify({ query }),
     });
     // console.log(res.json());
-
     return res.json();
   };
 
@@ -55,19 +55,51 @@ const GraphQLPage = (): JSX.Element => {
   }, [url]);
 
   const printData = (): void => {
+    setLoading(true);
+    setResponse('');
     makeRequest().then((res): void => {
       if (res.data) {
         setResponse(JSON.stringify(res.data, undefined, 2));
       } else if (res.errors) {
         setResponse(JSON.stringify(res.errors, undefined, 2));
       }
+      setLoading(false);
     });
+  };
+
+  const prettify = (code: string): void => {
+    let level = 0;
+    let result = '';
+    const str = code
+      .replace(/\s*([{}])\s*/g, '$1')
+      .replace(/\s+/g, ' ')
+      .trim();
+    for (let i = 0; i < str.length; i += 1) {
+      if (str[i] === '{') {
+        level += 2;
+        result += ` ${str[i]}\n${' '.repeat(level)}`;
+      } else if (str[i] === '}') {
+        level -= 2;
+        result += `\n${' '.repeat(level)}${str[i]}`;
+      } else if (str[i] === ' ') {
+        result += `\n${' '.repeat(level)}`;
+      } else {
+        result += str[i];
+      }
+    }
+    // console.log(str);
+    // console.log(result);
+    setQuery(result);
   };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <button className={styles.button} type="button">
+        <button
+          className={styles.button}
+          type="button"
+          onClick={(): void => prettify(query)}
+        >
           {GraphQLtextObj[lang].prettify}
         </button>
         <input
@@ -101,6 +133,7 @@ const GraphQLPage = (): JSX.Element => {
         </div>
         <div className={styles.response}>
           <pre>{response}</pre>
+          {isLoading && <div className={styles.loader} />}
         </div>
       </div>
     </div>
