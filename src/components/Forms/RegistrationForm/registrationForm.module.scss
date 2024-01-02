@@ -50,7 +50,7 @@
     color: $disabledTextColor;
     border: 1px solid $disabledTextColor;
 
-    &:hover {
+    @include _hover {
       cursor: not-allowed;
       color: $disabledTextColor;
       border: 1px solid $disabledTextColor;
@@ -61,14 +61,6 @@
     @include _tablet {
       background-color: $disabledTextColor;
       color: #ffffff;
-
-      &:hover {
-        cursor: not-allowed;
-        border: 1px solid $disabledTextColor;
-        background-color: $disabledTextColor;
-        color: #ffffff;
-        scale: 1;
-      }
     }
   }
 

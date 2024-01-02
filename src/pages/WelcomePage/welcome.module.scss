@@ -92,17 +92,13 @@
   border: 0;
   background-color: transparent;
 
-  &:hover {
+  @include _hover {
     cursor: pointer;
     color: $highlightedTextColor;
   }
 
   @include _tablet {
     font-size: $sizeMobileNormal;
-
-    &:hover {
-      color: $defaultTextColor;
-    }
   }
 }
 
@@ -141,14 +137,8 @@
   margin: 0 auto;
   margin-bottom: $marginDesktopDiv2;
 
-  &:hover {
+  @include _hover {
     transform: scale(1.02);
-  }
-
-  @include _tablet {
-    &:hover {
-      transform: scale(1);
-    }
   }
 }
 
@@ -165,7 +155,7 @@
   right: 20px;
   margin: $marginDesktopDiv2;
 
-  &:hover {
+  @include _hover {
     .icon {
       animation-duration: 0.5s;
       animation-name: iconHover;
@@ -174,18 +164,6 @@
 
     .links {
       color: $highlightedTextColor;
-    }
-  }
-
-  @include _tablet {
-    &:hover {
-      .icon {
-        animation: none;
-      }
-
-      .links {
-        color: $defaultTextColor;
-      }
     }
   }
 }

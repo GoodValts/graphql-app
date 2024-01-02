@@ -18,12 +18,11 @@
   font-size: $sizeDesktopNormal;
   text-align: center;
 
-  &:hover {
+  @include _hover {
     color: $highlightedTextColor;
   }
 
   @include _tablet {
     font-size: $sizeMobileNormal;
-    color: $highlightedTextColor;
   }
 }
