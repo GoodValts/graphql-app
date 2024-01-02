@@ -28,7 +28,7 @@
   color: #e9ece6;
   transition: 0.3s;
 
-  &:hover {
+  @include _hover {
     background: #393d3d;
   }
 }
@@ -48,7 +48,7 @@
   color: #e9ece6;
   transition: 0.3s;
 
-  &:hover {
+  @include _hover {
     background: #393d3d;
   }
 }
