@@ -74,7 +74,7 @@
   @include _graphql_btn;
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 20px;
   width: 40px;
   height: 40px;
 
@@ -172,6 +172,7 @@
   width: 100%;
   height: auto;
   border-radius: 0 0 5px 5px;
+  background: #c6d7d5;
 
   .query_input {
     height: 10rem;

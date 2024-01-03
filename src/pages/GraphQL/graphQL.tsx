@@ -10,15 +10,21 @@ interface ResponseData {
 }
 
 const exampleUrl = 'https://rickandmortyapi.com/graphql';
-const examleQuery = `query {
-    characters {
-      results {
-        name
-        status
-      }
+const examleQuery = `query AllCharacters($page: Int, $filter: FilterCharacter) {
+  characters(page: $page, filter: $filter) {
+    results {
+      name
+      status
     }
   }
+}
 `;
+const exampleVariables = `{
+  "page": 1,
+  "filter": {
+    "name": "Rick"
+  }
+}`;
 
 const GraphQLPage = (): JSX.Element => {
   const [url, setUrl] = useState(exampleUrl);
@@ -29,7 +35,7 @@ const GraphQLPage = (): JSX.Element => {
   const [isLoading, setLoading] = useState(false);
   const [displayParams, setDisplayParams] = useState('none');
   const [currParams, setCurrParams] = useState('variables');
-  const [variables, setVariables] = useState('variables example');
+  const [variables, setVariables] = useState(exampleVariables);
   const [headers, setHeaders] = useState('headers example');
   const { lang } = useContext(AuthContext);
 
@@ -39,7 +45,10 @@ const GraphQLPage = (): JSX.Element => {
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({
+        query,
+        variables: JSON.parse(variables),
+      }),
     });
     return res.json();
   };
