@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import styles from './graphQL.module.scss';
 import { AuthContext } from '../../controllers/appControllers';
 import GraphQLtextObj from './langData';
@@ -29,7 +28,7 @@ const GraphQLPage = (): JSX.Element => {
   const [statusMessage, setStatusMessage] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [displayParams, setDisplayParams] = useState('none');
-  const [currParams, setCurrParams] = useState('');
+  const [currParams, setCurrParams] = useState('variables');
   const [variables, setVariables] = useState('variables example');
   const [headers, setHeaders] = useState('headers example');
   const { lang } = useContext(AuthContext);
@@ -42,7 +41,6 @@ const GraphQLPage = (): JSX.Element => {
       },
       body: JSON.stringify({ query }),
     });
-    // console.log(res.json());
     return res.json();
   };
 
@@ -107,7 +105,11 @@ const GraphQLPage = (): JSX.Element => {
           <div className={styles.params}>
             <div className={styles.param_tabs}>
               <button
-                className={styles.button}
+                className={
+                  currParams === 'variables'
+                    ? styles.button_active
+                    : styles.button
+                }
                 type="button"
                 onClick={(): void => {
                   setDisplayParams('block');
@@ -117,7 +119,11 @@ const GraphQLPage = (): JSX.Element => {
                 Variables
               </button>
               <button
-                className={styles.button}
+                className={
+                  currParams === 'headers'
+                    ? styles.button_active
+                    : styles.button
+                }
                 type="button"
                 onClick={(): void => {
                   setDisplayParams('block');
@@ -126,6 +132,21 @@ const GraphQLPage = (): JSX.Element => {
               >
                 Headers
               </button>
+              <button
+                className={styles.toggle}
+                type="button"
+                aria-label="toggle"
+                style={
+                  displayParams === 'none'
+                    ? { transform: 'rotate(45deg)' }
+                    : { transform: 'rotate(-135deg)', top: '0.5rem' }
+                }
+                onClick={(): void =>
+                  displayParams === 'none'
+                    ? setDisplayParams('block')
+                    : setDisplayParams('none')
+                }
+              />
             </div>
             <textarea
               className={styles.query_input}

@@ -5,7 +5,6 @@
   align-items: center;
   justify-content: center;
   padding: 3px 10px;
-  border: none;
   background: transparent;
   border-radius: 5px;
   border: 1px solid $defaultTextColor;
@@ -46,7 +45,7 @@
   height: calc(100vh - 100px);
   font-family: Arial, Helvetica, sans-serif;
   font-size: $sizeDesktopSmall;
-  background: #f1f4ee;
+  background: #fff;
   color: $defaultTextColor;
 }
 
@@ -58,9 +57,15 @@
   gap: 10px;
 }
 
-.button {
+.button,
+.button_active {
   @include _graphql_btn;
   height: 2rem;
+}
+
+.button_active {
+  border: none;
+  color: $defaultTextColor;
 }
 
 .button_run {
@@ -163,7 +168,6 @@
   width: 100%;
   height: auto;
   border-radius: 0 0 5px 5px;
-  background: #a0b7b4; //to see it opens
 
   .query_input {
     height: 10rem;
@@ -171,6 +175,7 @@
 }
 
 .param_tabs {
+  position: relative;
   padding: 3px 10px;
   display: flex;
   gap: 1rem;
@@ -178,7 +183,20 @@
 
   .button {
     border: none;
+    color: $disabledTextColor;
   }
+}
+
+.toggle {
+  position: absolute;
+  top: 1rem;
+  right: 10px;
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 1px solid;
+  border-color: $defaultTextColor transparent transparent $defaultTextColor ;
+  background: transparent;
+  transition: 0.3s;
 }
 
 .response {
