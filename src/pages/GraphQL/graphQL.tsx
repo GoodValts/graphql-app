@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './graphQL.module.scss';
 import { AuthContext } from '../../controllers/appControllers';
 import GraphQLtextObj from './langData';
+import prettify from './prettify';
 
 interface ResponseData {
   data?: unknown;
@@ -26,6 +28,10 @@ const GraphQLPage = (): JSX.Element => {
   const [statusColor, setStatusColor] = useState('status_loading');
   const [statusMessage, setStatusMessage] = useState('');
   const [isLoading, setLoading] = useState(false);
+  const [displayParams, setDisplayParams] = useState('none');
+  const [currParams, setCurrParams] = useState('');
+  const [variables, setVariables] = useState('variables example');
+  const [headers, setHeaders] = useState('headers example');
   const { lang } = useContext(AuthContext);
 
   const makeRequest = async (): Promise<ResponseData> => {
@@ -67,38 +73,13 @@ const GraphQLPage = (): JSX.Element => {
     });
   };
 
-  const prettify = (code: string): void => {
-    let level = 0;
-    let result = '';
-    const str = code
-      .replace(/\s*([{}])\s*/g, '$1')
-      .replace(/\s+/g, ' ')
-      .trim();
-    for (let i = 0; i < str.length; i += 1) {
-      if (str[i] === '{') {
-        level += 2;
-        result += ` ${str[i]}\n${' '.repeat(level)}`;
-      } else if (str[i] === '}') {
-        level -= 2;
-        result += `\n${' '.repeat(level)}${str[i]}`;
-      } else if (str[i] === ' ') {
-        result += `\n${' '.repeat(level)}`;
-      } else {
-        result += str[i];
-      }
-    }
-    // console.log(str);
-    // console.log(result);
-    setQuery(result);
-  };
-
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.graphql}>
       <div className={styles.header}>
         <button
           className={styles.button}
           type="button"
-          onClick={(): void => prettify(query)}
+          onClick={(): void => setQuery(prettify(query))}
         >
           {GraphQLtextObj[lang].prettify}
         </button>
@@ -115,7 +96,7 @@ const GraphQLPage = (): JSX.Element => {
         </label>
         <div className={styles[statusColor]} />
       </div>
-      <div className={styles.query_wrapper}>
+      <div className={styles.main}>
         <div className={styles.query}>
           <textarea
             className={styles.query_input}
@@ -123,6 +104,40 @@ const GraphQLPage = (): JSX.Element => {
             value={query}
             onChange={(e): void => setQuery(e.target.value)}
           />
+          <div className={styles.params}>
+            <div className={styles.param_tabs}>
+              <button
+                className={styles.button}
+                type="button"
+                onClick={(): void => {
+                  setDisplayParams('block');
+                  setCurrParams('variables');
+                }}
+              >
+                Variables
+              </button>
+              <button
+                className={styles.button}
+                type="button"
+                onClick={(): void => {
+                  setDisplayParams('block');
+                  setCurrParams('headers');
+                }}
+              >
+                Headers
+              </button>
+            </div>
+            <textarea
+              className={styles.query_input}
+              style={{ display: `${displayParams}` }}
+              value={currParams === 'variables' ? variables : headers}
+              onChange={(e): void =>
+                currParams === 'variables'
+                  ? setVariables(e.target.value)
+                  : setHeaders(e.target.value)
+              }
+            />
+          </div>
           <button
             className={styles.button_run}
             type="button"

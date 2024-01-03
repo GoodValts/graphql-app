@@ -36,7 +36,7 @@
   }
 }
 
-.wrapper {
+.graphql {
   box-sizing: border-box;
   display: grid;
   grid-template-rows: 30px minmax(auto, calc(100vh - 250px));
@@ -47,6 +47,7 @@
   font-family: Arial, Helvetica, sans-serif;
   font-size: $sizeDesktopSmall;
   background: #f1f4ee;
+  color: $defaultTextColor;
 }
 
 .header {
@@ -93,7 +94,7 @@
   border: none;
   border-radius: 5px;
   background: #c6d7d5;
-  color: #2e3130;
+  color: $defaultTextColor;
 }
 
 .status,
@@ -128,7 +129,7 @@
   color: #90281c;
 }
 
-.query_wrapper {
+.main {
   display: flex;
   gap: 10px;
   height: 100%;
@@ -150,10 +151,34 @@
   outline: none;
   border: none;
   border-radius: 3px;
-  background: #c6d7d5;
+  background: transparent;
   font-family: Consolas, monaco, monospace;
-  color: #2e3130;
+  color: $defaultTextColor;
   resize: none;
+}
+
+.params {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  border-radius: 0 0 5px 5px;
+  background: #a0b7b4; //to see it opens
+
+  .query_input {
+    height: 10rem;
+  }
+}
+
+.param_tabs {
+  padding: 3px 10px;
+  display: flex;
+  gap: 1rem;
+  border-top: 1px solid $highlightedTextColor;
+
+  .button {
+    border: none;
+  }
 }
 
 .response {
@@ -164,7 +189,7 @@
   overflow: scroll;
 
   pre {
-    font-family: Consolas, monaco, monospace;;
+    font-family: Consolas, monaco, monospace;
     font-size: $sizeDesktopSmall;
   }
 
