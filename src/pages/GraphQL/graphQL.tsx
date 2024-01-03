@@ -22,8 +22,8 @@ const GraphQLPage = (): JSX.Element => {
     }
   }`);
   const [response, setResponse] = useState('');
-  const [schema, setSchema] = useState<GraphQLSchema | undefined>();
-  // const [schema, setSchema] = useState('');
+  //  const [schema, setSchema] = useState<GraphQLSchema | undefined>();
+  const [schema, setSchema] = useState('');
   const [open, setOpen] = useState(false);
   const { lang } = useContext(AuthContext);
 
@@ -45,8 +45,8 @@ const GraphQLPage = (): JSX.Element => {
   const getRequest = (): void => {
     setOpen(!open);
     getIntrospectionSchema(url).then((res) => {
-      setSchema(res);
-      // setSchema(printSchema(res));
+      // setSchema(res);
+      setSchema(printSchema(res));
     });
   };
 
