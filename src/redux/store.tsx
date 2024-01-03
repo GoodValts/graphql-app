@@ -1,10 +1,8 @@
-/* import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import settingsReducer from './reducers/settings';
+import api from './api/api';
 
-export const reducers = combineReducers({
-  settings: settingsReducer,
-});
+export const reducers = combineReducers({});
 
 export const store = configureStore({
   reducer: reducers,
@@ -17,8 +15,3 @@ export type AppDispatch = typeof store.dispatch;
 export type RootReducer = ReturnType<typeof reducers>;
 
 setupListeners(store.dispatch);
-
-export const selectLanguage = (state: RootState): string =>
-  state.settings.language;
-export const selectEndpoint = (state: RootState): string =>
-  state.settings.endpoint; */

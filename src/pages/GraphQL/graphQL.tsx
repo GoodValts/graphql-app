@@ -1,9 +1,13 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import { GraphQLSchema, printSchema } from 'graphql';
+import hljs from 'highlight.js/lib/core';
 import styles from './graphQL.module.scss';
 import { AuthContext } from '../../controllers/appControllers';
 import GrapgQLtextObj from './langData';
+import getIntrospectionSchema from '../../redux/api/api';
+import Documentation from '../../components/Documentation/Documentation';
 
-interface ResponseData {
+export interface ResponseData {
   data: undefined;
 }
 
@@ -18,7 +22,13 @@ const GraphQLPage = (): JSX.Element => {
     }
   }`);
   const [response, setResponse] = useState('');
+  const [schema, setSchema] = useState<GraphQLSchema | undefined>();
+  const [open, setOpen] = useState(false);
   const { lang } = useContext(AuthContext);
+
+  useEffect(() => {
+    hljs.highlightAll();
+  }, [schema, open]);
 
   const makeRequest = async (): Promise<ResponseData> => {
     const res = await fetch(url, {
@@ -29,6 +39,13 @@ const GraphQLPage = (): JSX.Element => {
       body: JSON.stringify({ query }),
     });
     return res.json();
+  };
+
+  const getRequest = (): void => {
+    setOpen(!open);
+    getIntrospectionSchema(url).then((res) => {
+      setSchema(res);
+    });
   };
 
   const printData = (): void => {
@@ -50,11 +67,16 @@ const GraphQLPage = (): JSX.Element => {
           value={url}
           onChange={(e): void => setUrl(e.target.value)}
         />
-        <button className={styles.button} type="submit">
+        <button
+          className={styles.button}
+          type="button"
+          onClick={(): void => getRequest()}
+        >
           {GrapgQLtextObj[lang].submit}
         </button>
       </form>
       <div className={styles.query_wrapper}>
+        {open && <Documentation schema={schema} />}
         <div className={styles.query}>
           <textarea
             className={styles.query_input}
