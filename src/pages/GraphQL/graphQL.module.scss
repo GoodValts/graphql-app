@@ -11,11 +11,13 @@
   color: $defaultTextColor;
   transition: 0.3s;
 
-  &:hover {
-    cursor: pointer;
-    border-color: $highlightedTextColor;
-    background: $highlightedTextColor;
-    color: #fff;
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+      border-color: $highlightedTextColor;
+      background: $highlightedTextColor;
+      color: #fff;
+    }
   }
 }
 
@@ -76,8 +78,10 @@
   width: 40px;
   height: 40px;
 
-  &:hover .arrow_right {
-    border-left-color: #fff;
+  @media (hover: hover) {
+    &:hover .arrow_right {
+      border-left-color: #fff;
+    }
   }
 }
 
@@ -184,6 +188,12 @@
   .button {
     border: none;
     color: $disabledTextColor;
+
+    @media (hover: hover) {
+      &:hover {
+        color: #fff;
+      }
+    }
   }
 }
 
@@ -194,7 +204,7 @@
   width: 0.7rem;
   height: 0.7rem;
   border: 1px solid;
-  border-color: $defaultTextColor transparent transparent $defaultTextColor ;
+  border-color: $defaultTextColor transparent transparent $defaultTextColor;
   background: transparent;
   transition: 0.3s;
 }
