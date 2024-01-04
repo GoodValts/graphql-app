@@ -66,7 +66,7 @@ const GraphQLPage = (): JSX.Element => {
       },
       () => {
         setStatusColor('status_error');
-        setStatusMessage(GrapgQLtextObj[lang].errorMessage);
+        setStatusMessage(GraphQLtextObj[lang].errorMessage);
       }
     );
   }, [url]);
@@ -139,7 +139,7 @@ const GraphQLPage = (): JSX.Element => {
                   setCurrParams('variables');
                 }}
               >
-                {GrapgQLtextObj[lang].variables}
+                {GraphQLtextObj[lang].variables}
               </button>
               <button
                 className={
@@ -153,7 +153,7 @@ const GraphQLPage = (): JSX.Element => {
                   setCurrParams('headers');
                 }}
               >
-                {GrapgQLtextObj[lang].headers}
+                {GraphQLtextObj[lang].headers}
               </button>
               <button
                 className={styles.toggle}
