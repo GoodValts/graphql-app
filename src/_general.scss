@@ -34,6 +34,14 @@ $highlightedHeaderColor: #6495ed;
 
 // adaptive mixins
 
+@mixin _hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
 @mixin _tablet {
   @media (max-width: 1279.98px) {
     @content;
@@ -58,7 +66,7 @@ $highlightedHeaderColor: #6495ed;
   padding: $marginDesktopDiv2 $marginDesktop;
   margin: $marginDesktopDiv4;
 
-  &:hover {
+  @include _hover {
     cursor: pointer;
     border: 1px solid $highlightedTextColor;
     color: #ffffff;
@@ -70,13 +78,6 @@ $highlightedHeaderColor: #6495ed;
     font-size: $sizeMobileNormal;
     background-color: $defaultTextColor;
     color: #ffffff;
-
-    &:hover {
-      background-color: $defaultTextColor;
-      color: #ffffff;
-      border: 1px solid $defaultTextColor;
-      scale: 1;
-    }
   }
 
   @include _mobile {

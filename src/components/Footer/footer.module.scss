@@ -33,16 +33,12 @@
   margin: $marginDesktopDiv4 $marginDesktopDiv2;
   color: $defaultHeaderColor;
 
-  &:hover {
+  @include _hover {
     color: $highlightedHeaderColor;
   }
 
   @include _tablet {
     margin: $marginDesktopDiv4;
-
-    &:hover {
-      color: $defaultHeaderColor;
-    }
   }
 
   @include _mobile {
@@ -111,17 +107,13 @@
   margin: $marginDesktopDiv4 $marginDesktop;
   width: 100px;
 
-  &:hover {
+  @include _hover {
     transform: scale(1.05);
   }
 
   @include _tablet {
     width: 80px;
     margin: $marginDesktopDiv4 $marginDesktopDiv4;
-
-    &:hover {
-      transform: scale(1);
-    }
   }
 
   @include _mobile {
