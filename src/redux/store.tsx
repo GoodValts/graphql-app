@@ -22,3 +22,14 @@ export const selectLanguage = (state: RootState): string =>
   state.settings.language;
 export const selectEndpoint = (state: RootState): string =>
   state.settings.endpoint; */
+import { configureStore } from '@reduxjs/toolkit';
+import endpointReducer from './reducers/endpointSlice';
+
+export const store = configureStore({
+  reducer: {
+    endpoint: endpointReducer,
+  },
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

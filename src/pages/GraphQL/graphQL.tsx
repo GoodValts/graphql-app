@@ -1,18 +1,17 @@
-import { useContext, useEffect, useState } from 'react';
-import styles from './graphQL.module.scss';
+import { useContext, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import Documentation from '../../components/Documentation/Documentation';
+import EndpointInput from '../../components/EndpointInput/EndpointInput';
 import { AuthContext } from '../../controllers/appControllers';
 import GraphQLtextObj from './langData';
-import prettify from './prettify';
+import prettify from '../../utils/prettify';
+import makeRequest from '../../utils/api';
 
 import document from '../../assets/img/doc.svg';
-import Documentation from '../../components/Documentation/Documentation';
 
-interface ResponseData {
-  data?: unknown;
-  errors?: unknown;
-}
+import styles from './graphQL.module.scss';
 
-const exampleUrl = 'https://rickandmortyapi.com/graphql';
 const examleQuery = `query AllCharacters($page: Int, $filter: FilterCharacter) {
   characters(page: $page, filter: $filter) {
     results {
@@ -30,11 +29,8 @@ const exampleVariables = `{
 }`;
 
 const GraphQLPage = (): JSX.Element => {
-  const [url, setUrl] = useState(exampleUrl);
   const [query, setQuery] = useState(examleQuery);
   const [response, setResponse] = useState('');
-  const [statusColor, setStatusColor] = useState('status_loading');
-  const [statusMessage, setStatusMessage] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [displayParams, setDisplayParams] = useState('none');
   const [currParams, setCurrParams] = useState('variables');
@@ -42,39 +38,12 @@ const GraphQLPage = (): JSX.Element => {
   const [headers, setHeaders] = useState('headers example');
   const [isDocsOpen, setDocsOpen] = useState(false);
   const { lang } = useContext(AuthContext);
-
-  const makeRequest = async (): Promise<ResponseData> => {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        query,
-        variables: JSON.parse(variables),
-      }),
-    });
-    return res.json();
-  };
-
-  useEffect(() => {
-    setStatusColor('status_loading');
-    setStatusMessage('');
-    makeRequest().then(
-      () => {
-        setStatusColor('status_success');
-      },
-      () => {
-        setStatusColor('status_error');
-        setStatusMessage(GraphQLtextObj[lang].errorMessage);
-      }
-    );
-  }, [url]);
+  const url = useSelector((state: RootState) => state.endpoint.value);
 
   const printData = (): void => {
     setLoading(true);
     setResponse('');
-    makeRequest().then((res): void => {
+    makeRequest(url, query, variables).then((res): void => {
       if (res.data) {
         setResponse(JSON.stringify(res.data, undefined, 2));
       } else if (res.errors) {
@@ -95,18 +64,7 @@ const GraphQLPage = (): JSX.Element => {
         >
           {GraphQLtextObj[lang].prettify}
         </button>
-        <input
-          name="url"
-          className={styles.url_input}
-          type="url"
-          placeholder={GraphQLtextObj[lang].urlPlaceholder}
-          value={url}
-          onChange={(e): void => setUrl(e.target.value)}
-        />
-        <label htmlFor="url" className={styles.status_message}>
-          {statusMessage}
-        </label>
-        <div className={styles[statusColor]} />
+        <EndpointInput />
         <button
           className={styles.button_doc}
           type="button"
@@ -120,7 +78,7 @@ const GraphQLPage = (): JSX.Element => {
       <div className={styles.main}>
         <div className={styles.query}>
           <textarea
-            className={styles.query_input}
+            className={styles.input}
             placeholder={GraphQLtextObj[lang].queryPlaceholder}
             value={query}
             onChange={(e): void => setQuery(e.target.value)}
@@ -172,7 +130,7 @@ const GraphQLPage = (): JSX.Element => {
               />
             </div>
             <textarea
-              className={styles.query_input}
+              className={styles.input}
               style={{ display: `${displayParams}` }}
               value={currParams === 'variables' ? variables : headers}
               onChange={(e): void =>
