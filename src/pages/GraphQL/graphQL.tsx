@@ -66,7 +66,7 @@ const GraphQLPage = (): JSX.Element => {
       },
       () => {
         setStatusColor('status_error');
-        setStatusMessage('Server cannot be reached');
+        setStatusMessage(GrapgQLtextObj[lang].errorMessage);
       }
     );
   }, [url]);
@@ -110,7 +110,9 @@ const GraphQLPage = (): JSX.Element => {
         <button
           className={styles.button_doc}
           type="button"
-          onClick={(): void => isDocsOpen ? setDocsOpen(false) : setDocsOpen(true)}
+          onClick={(): void =>
+            isDocsOpen ? setDocsOpen(false) : setDocsOpen(true)
+          }
         >
           <img src={document} alt="documentation" />
         </button>
@@ -137,7 +139,7 @@ const GraphQLPage = (): JSX.Element => {
                   setCurrParams('variables');
                 }}
               >
-                Variables
+                {GrapgQLtextObj[lang].variables}
               </button>
               <button
                 className={
@@ -151,7 +153,7 @@ const GraphQLPage = (): JSX.Element => {
                   setCurrParams('headers');
                 }}
               >
-                Headers
+                {GrapgQLtextObj[lang].headers}
               </button>
               <button
                 className={styles.toggle}
