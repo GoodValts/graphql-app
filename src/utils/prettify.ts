@@ -19,8 +19,6 @@ const prettify = (code: string): string => {
       result += str[i];
     }
   }
-  console.log(str);
-  console.log(result);
   return result;
 };
 

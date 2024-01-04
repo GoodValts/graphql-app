@@ -6,16 +6,18 @@ interface ResponseData {
 const makeRequest = async (
   url: string,
   query: string = '',
-  variables: string = '{}'
+  variables: string = '{}',
+  headers: string = '{}'
 ): Promise<ResponseData> => {
   const res = await fetch(url, {
     method: 'POST',
     headers: {
+      ...JSON.parse(headers || '{}'),
       'Content-type': 'application/json',
     },
     body: JSON.stringify({
       query,
-      variables: JSON.parse(variables),
+      variables: JSON.parse(variables || '{}'),
     }),
   });
   return res.json();

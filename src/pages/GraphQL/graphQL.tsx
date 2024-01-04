@@ -35,7 +35,7 @@ const GraphQLPage = (): JSX.Element => {
   const [displayParams, setDisplayParams] = useState('none');
   const [currParams, setCurrParams] = useState('variables');
   const [variables, setVariables] = useState(exampleVariables);
-  const [headers, setHeaders] = useState('headers example');
+  const [headers, setHeaders] = useState('');
   const [isDocsOpen, setDocsOpen] = useState(false);
   const { lang } = useContext(AuthContext);
   const url = useSelector((state: RootState) => state.endpoint.value);
@@ -43,14 +43,20 @@ const GraphQLPage = (): JSX.Element => {
   const printData = (): void => {
     setLoading(true);
     setResponse('');
-    makeRequest(url, query, variables).then((res): void => {
-      if (res.data) {
-        setResponse(JSON.stringify(res.data, undefined, 2));
-      } else if (res.errors) {
-        setResponse(JSON.stringify(res.errors, undefined, 2));
+    makeRequest(url, query, variables, headers).then(
+      (res): void => {
+        if (res.data) {
+          setResponse(JSON.stringify(res.data, undefined, 2));
+        } else if (res.errors) {
+          setResponse(JSON.stringify(res.errors, undefined, 2));
+        }
+        setLoading(false);
+      },
+      (error) => {
+        setResponse(`${error.name}: ${error.message}`);
+        setLoading(false);
       }
-      setLoading(false);
-    });
+    );
   };
 
   return (
@@ -60,7 +66,11 @@ const GraphQLPage = (): JSX.Element => {
         <button
           className={styles.button}
           type="button"
-          onClick={(): void => setQuery(prettify(query))}
+          onClick={(): void => {
+            setQuery(prettify(query));
+            setVariables(JSON.stringify(JSON.parse(variables), undefined, 2));
+            setHeaders(JSON.stringify(JSON.parse(headers), undefined, 2));
+          }}
         >
           {GraphQLtextObj[lang].prettify}
         </button>
