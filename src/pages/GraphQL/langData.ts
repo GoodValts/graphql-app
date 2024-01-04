@@ -1,8 +1,10 @@
 interface GrapgQLLangObjType {
   prettify: string;
-  submit: string;
   urlPlaceholder: string;
   queryPlaceholder: string;
+  variables: string;
+  headers: string;
+  errorMessage: string;
 }
 
 interface GrapgQLTextObjType {
@@ -12,15 +14,19 @@ interface GrapgQLTextObjType {
 const GrapgQLtextObj: GrapgQLTextObjType = {
   en: {
     prettify: 'Prettify',
-    submit: 'Submit',
     urlPlaceholder: 'Enter URL',
     queryPlaceholder: 'Enter query',
+    variables: 'Variables',
+    headers: 'Headers',
+    errorMessage: 'Server cannot be reached',
   },
   ru: {
     prettify: 'Форматировать',
-    submit: 'Подтвердить',
     urlPlaceholder: 'Введите URL',
     queryPlaceholder: 'Введите запрос',
+    variables: 'Переменные',
+    headers: 'Заголовки',
+    errorMessage: 'Сервер недоступен',
   },
 };
 
