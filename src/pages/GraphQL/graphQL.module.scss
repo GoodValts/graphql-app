@@ -70,6 +70,24 @@
   color: $defaultTextColor;
 }
 
+.button_doc {
+  position: relative;
+  z-index: 3;
+  border: none;
+  background: transparent;
+
+  img {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      scale: 1.1;
+    }
+  }
+}
+
 .button_run {
   @include _graphql_btn;
   position: absolute;
@@ -112,7 +130,7 @@
 .status_loading {
   position: absolute;
   top: 0.5rem;
-  right: 0.5rem;
+  right: 3rem;
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
@@ -133,7 +151,7 @@
 .status_message {
   position: absolute;
   top: 0.25rem;
-  right: 2rem;
+  right: 5rem;
   font-size: 1rem;
   color: #90281c;
 }

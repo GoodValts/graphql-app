@@ -4,6 +4,9 @@ import { AuthContext } from '../../controllers/appControllers';
 import GraphQLtextObj from './langData';
 import prettify from './prettify';
 
+import document from '../../assets/img/doc.svg';
+import Documentation from '../../components/Documentation/Documentation';
+
 interface ResponseData {
   data?: unknown;
   errors?: unknown;
@@ -37,6 +40,7 @@ const GraphQLPage = (): JSX.Element => {
   const [currParams, setCurrParams] = useState('variables');
   const [variables, setVariables] = useState(exampleVariables);
   const [headers, setHeaders] = useState('headers example');
+  const [isDocsOpen, setDocsOpen] = useState(false);
   const { lang } = useContext(AuthContext);
 
   const makeRequest = async (): Promise<ResponseData> => {
@@ -82,6 +86,7 @@ const GraphQLPage = (): JSX.Element => {
 
   return (
     <div className={styles.graphql}>
+      {isDocsOpen && <Documentation />}
       <div className={styles.header}>
         <button
           className={styles.button}
@@ -102,6 +107,13 @@ const GraphQLPage = (): JSX.Element => {
           {statusMessage}
         </label>
         <div className={styles[statusColor]} />
+        <button
+          className={styles.button_doc}
+          type="button"
+          onClick={(): void => isDocsOpen ? setDocsOpen(false) : setDocsOpen(true)}
+        >
+          <img src={document} alt="documentation" />
+        </button>
       </div>
       <div className={styles.main}>
         <div className={styles.query}>
