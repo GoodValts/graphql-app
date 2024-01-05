@@ -69,6 +69,7 @@ const Footer = (): JSX.Element => {
         <a href="https://rs.school/react/">
           <img
             className={styles.rssLogo}
+            data-testid="rss-icon"
             onMouseEnter={(e): void => {
               if (window.screen.width > 1279.98) {
                 const img = e.target as HTMLImageElement;

@@ -1,10 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signOut,
-} from 'firebase/auth';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getAuth, signOut } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCEWeygQUpvvKlpxXypzp0-25VZq4vPzw',
@@ -19,25 +15,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const registerWithEmailAndPassword = async (
-  name: string,
-  email: string,
-  password: string
-): Promise<void> => {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const { user } = res;
-    await addDoc(collection(db, 'users'), {
-      uid: user.uid,
-      name,
-      authProvider: 'local',
-      email,
-    });
-  } catch (err) {
-    console.error(err);
-  }
-};
 const logout = (): void => {
   signOut(auth);
 };
-export { auth, db, registerWithEmailAndPassword, logout };
+export { auth, db, logout };

@@ -90,7 +90,6 @@ const Header = (): JSX.Element => {
                 setLang(radio.value);
                 localStorage.setItem('lang', radio.value);
               }}
-              data-testid={radio.value}
             >
               {radio.name}
             </button>
@@ -136,52 +135,6 @@ const Header = (): JSX.Element => {
               </button>
             </div>
           ) : (
-            // <>
-            //   <Nav
-            //     className={styles.nav}
-            //     fill
-            //     variant="pills"
-            //     defaultActiveKey="/"
-            //   >
-            //     <Nav.Item>
-            //       <Nav.Link
-            //         // href="/graphQL"
-            //         eventKey="graphQL"
-            //         data-testid="graphql-btn"
-            //         onClick={(): void => navigate('/graphQL')}
-            //       >
-            //         GraphQL
-            //       </Nav.Link>
-            //     </Nav.Item>
-            //   </Nav>
-            //   <Button
-            //     variant="outline-info"
-            //     size="lg"
-            //     onClick={(): void => {
-            //       logout();
-            //       navigate('/');
-            //     }}
-            //   >
-            //     {textObj[lang].signOut}
-            //   </Button>
-            // </>
-
-            // <Stack direction="horizontal" gap={2} className="ms-auto">
-            //   <Button
-            //     variant="outline-info"
-            //     size="lg"
-            //     onClick={(): void => navigate('/login')}
-            //   >
-            //     {textObj[lang].signIn}
-            //   </Button>
-            //   <Button
-            //     variant="outline-info"
-            //     size="lg"
-            //     onClick={(): void => navigate('/registration')}
-            //   >
-            //     {textObj[lang].signUp}
-            //   </Button>
-            // </Stack>
             <div className={styles.nav}>
               <button
                 type="button"
@@ -193,6 +146,7 @@ const Header = (): JSX.Element => {
               <button
                 type="button"
                 className={styles.iconButton}
+                data-testid="mobile-btn-login"
                 onClick={(): void => navigate('/login')}
               >
                 <img className={styles.icon} alt="sign_in" src={singInLogo} />
@@ -206,6 +160,7 @@ const Header = (): JSX.Element => {
               </button>
               <button
                 type="button"
+                data-testid="mobile-btn-reg"
                 className={styles.iconButton}
                 onClick={(): void => navigate('/registration')}
               >

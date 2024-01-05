@@ -36,9 +36,6 @@ const Input = <FormValues extends FieldValues>({
   }
 
   const showHidePassword = (img: HTMLImageElement): void => {
-    console.log(img);
-    console.log(img.src);
-    console.log(isVisible);
     if (isVisible) {
       setIsVisible(false);
       img.src = unVisibleImg;

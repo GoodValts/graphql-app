@@ -40,6 +40,4 @@ const getIntrospectionSchema = async (url: string): Promise<GraphQLSchema> => {
   const result = await response.json();
   return buildClientSchema(result.data);
 };
-export { getIntrospectionSchema };
-
-export default makeRequest;
+export { getIntrospectionSchema, makeRequest };

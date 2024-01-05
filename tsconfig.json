@@ -33,7 +33,7 @@
     "setupTest.ts",
     "__tests__/tests-helpers",
     "custom.d.ts",
-    "__tests__/",
+    "__tests__/", "__test-helpers__",
   ],
   "references": [
     {
