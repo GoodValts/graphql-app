@@ -89,6 +89,7 @@ const Header = (): JSX.Element => {
                 setLang(radio.value);
                 localStorage.setItem('lang', radio.value);
               }}
+              data-testid={radio.value}
             >
               {radio.name}
             </button>
