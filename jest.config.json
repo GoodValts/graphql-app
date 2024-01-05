@@ -7,7 +7,7 @@
     "bail": 1,
     "verbose": true,
     "moduleNameMapper": {
-      "\\.(css|module.scss|scss|gif|svg|png)$": "<rootDir>/__tests__/mocks/styleMock.json"
+      "\\.(css|module.scss|scss|gif|svg|png|jpg)$": "<rootDir>/__tests__/mocks/styleMock.json"
     },
     "setupFilesAfterEnv": ["<rootDir>/setupTest.ts"],
     "testEnvironmentOptions": {

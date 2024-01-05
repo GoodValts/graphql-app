@@ -11,6 +11,7 @@ import WelcomePage from './pages/WelcomePage/welcome';
 import LayoutPage from './pages/LayoutPage/LayoutPage';
 import LoginPage from './pages/LoginPage/login';
 import './App.scss';
+import 'highlight.js/styles/a11y-light.css';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

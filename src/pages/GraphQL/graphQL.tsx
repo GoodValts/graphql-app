@@ -1,12 +1,14 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { printSchema } from 'graphql';
+import hljs from 'highlight.js';
 import { RootState } from '../../redux/store';
 import Documentation from '../../components/Documentation/Documentation';
 import EndpointInput from '../../components/EndpointInput/EndpointInput';
 import { AuthContext } from '../../controllers/appControllers';
 import GraphQLtextObj from './langData';
 import prettify from '../../utils/prettify';
-import makeRequest from '../../utils/api';
+import makeRequest, { getIntrospectionSchema } from '../../utils/api';
 
 import document from '../../assets/img/doc.svg';
 
@@ -37,8 +39,13 @@ const GraphQLPage = (): JSX.Element => {
   const [variables, setVariables] = useState(exampleVariables);
   const [headers, setHeaders] = useState('');
   const [isDocsOpen, setDocsOpen] = useState(false);
+  const [schema, setSchema] = useState('');
   const { lang } = useContext(AuthContext);
   const url = useSelector((state: RootState) => state.endpoint.value);
+
+  useEffect(() => {
+    hljs.highlightAll();
+  }, [isDocsOpen, schema]);
 
   const printData = (): void => {
     setLoading(true);
@@ -59,9 +66,20 @@ const GraphQLPage = (): JSX.Element => {
     );
   };
 
+  const openDocs = (): void => {
+    if (!isDocsOpen) {
+      getIntrospectionSchema(url).then((res) => {
+        setDocsOpen(true);
+        setSchema(printSchema(res));
+      });
+    } else {
+      setDocsOpen(false);
+    }
+  };
+
   return (
     <div className={styles.graphql}>
-      {isDocsOpen && <Documentation />}
+      {isDocsOpen && <Documentation schema={schema} />}
       <div className={styles.header}>
         <button
           className={styles.button}
@@ -75,13 +93,7 @@ const GraphQLPage = (): JSX.Element => {
           {GraphQLtextObj[lang].prettify}
         </button>
         <EndpointInput />
-        <button
-          className={styles.button_doc}
-          type="button"
-          onClick={(): void =>
-            isDocsOpen ? setDocsOpen(false) : setDocsOpen(true)
-          }
-        >
+        <button className={styles.button_doc} type="button" onClick={openDocs}>
           <img src={document} alt="documentation" />
         </button>
       </div>
