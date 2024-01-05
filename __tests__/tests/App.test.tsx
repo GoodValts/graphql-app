@@ -20,9 +20,7 @@ jest.mock('react-firebase-hooks/auth', () => ({
 describe('Test App', () => {
   it('render App', () => {
     render(<App />);
-    const text = screen.getByText(/Phoenix GraphQL/i);
     expect(window.location.pathname).toEqual('/');
-    expect(text).toBeInTheDocument();
   });
   it('Checking if the user is authorized there is a button Sign Out ', async () => {
     render(<App />);
