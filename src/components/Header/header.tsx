@@ -76,6 +76,7 @@ const Header = (): JSX.Element => {
             <button
               key={radio.value}
               type="button"
+              data-testid={radio.value}
               className={`
               ${styles.toggleButton}
               ${id === 0 ? styles.first : ''}
