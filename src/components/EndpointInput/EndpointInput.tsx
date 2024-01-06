@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AuthContext } from '../../controllers/appControllers';
 import { RootState } from '../../redux/store';
 import { setEndpoint } from '../../redux/reducers/endpointSlice';
-import makeRequest from '../../utils/api';
+import { makeRequest } from '../../utils/api';
 import EndpointTextObj from './langData';
 
 import styles from './EndpointInput.module.scss';

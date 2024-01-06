@@ -2,17 +2,20 @@ import { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { printSchema } from 'graphql';
 import hljs from 'highlight.js';
+import javascript from 'highlight.js/lib/languages/javascript';
 import { RootState } from '../../redux/store';
 import Documentation from '../../components/Documentation/Documentation';
 import EndpointInput from '../../components/EndpointInput/EndpointInput';
 import { AuthContext } from '../../controllers/appControllers';
 import GraphQLtextObj from './langData';
 import prettify from '../../utils/prettify';
-import makeRequest, { getIntrospectionSchema } from '../../utils/api';
+import { makeRequest, getIntrospectionSchema } from '../../utils/api';
 
 import document from '../../assets/img/doc.svg';
 
 import styles from './graphQL.module.scss';
+
+hljs.registerLanguage('javascript', javascript);
 
 const examleQuery = `query AllCharacters($page: Int, $filter: FilterCharacter) {
   characters(page: $page, filter: $filter) {
@@ -93,7 +96,12 @@ const GraphQLPage = (): JSX.Element => {
           {GraphQLtextObj[lang].prettify}
         </button>
         <EndpointInput />
-        <button className={styles.button_doc} type="button" onClick={openDocs}>
+        <button
+          className={styles.button_doc}
+          type="button"
+          data-testid="docs-btn"
+          onClick={openDocs}
+        >
           <img src={document} alt="documentation" />
         </button>
       </div>
@@ -165,13 +173,15 @@ const GraphQLPage = (): JSX.Element => {
           <button
             className={styles.button_run}
             type="button"
-            onClick={(): void => printData()}
+            data-testid="arrow-btn"
+            onClick={printData}
           >
             <div className={styles.arrow_right} />
           </button>
         </div>
         <div className={styles.response}>
-          <pre>{response}</pre>
+          <pre data-testid="response-block">{response}</pre>
+
           {isLoading && <div className={styles.loader} />}
         </div>
       </div>
