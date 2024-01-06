@@ -199,18 +199,16 @@ const GraphQLPage = (): JSX.Element => {
                 }
               />
             </div>
-            <pre>
-              <textarea
-                className={styles.input}
-                style={{ display: `${displayParams}` }}
-                value={currParams === 'variables' ? variables : headers}
-                onChange={(e): void =>
-                  currParams === 'variables'
-                    ? setVariables(e.target.value)
-                    : setHeaders(e.target.value)
-                }
-              />
-            </pre>
+            <textarea
+              className={styles.input}
+              style={{ display: `${displayParams}` }}
+              value={currParams === 'variables' ? variables : headers}
+              onChange={(e): void =>
+                currParams === 'variables'
+                  ? setVariables(e.target.value)
+                  : setHeaders(e.target.value)
+              }
+            />
           </div>
           <button
             className={styles.button_run}
