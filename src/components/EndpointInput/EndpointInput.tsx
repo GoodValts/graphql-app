@@ -30,6 +30,7 @@ const EndpointInput = (): JSX.Element => {
   }, [url]);
 
   const handleChange = (value: string): void => {
+    localStorage.setItem('endpoint', value);
     dispatch(setEndpoint(value));
   };
 
