@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { LegacyRef, useContext, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { printSchema } from 'graphql';
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
+import 'highlight.js/styles/intellij-light.css';
 import { RootState } from '../../redux/store';
 import Documentation from '../../components/Documentation/Documentation';
 import EndpointInput from '../../components/EndpointInput/EndpointInput';
@@ -69,6 +70,44 @@ const GraphQLPage = (): JSX.Element => {
     );
   };
 
+  const responseRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const el = responseRef.current;
+    console.log(el);
+    console.log(el?.dataset.highlighted);
+    if (el) {
+      if (el.dataset.highlighted === 'yes') {
+        delete el.dataset.highlighted;
+        hljs.highlightElement(el);
+      } else {
+        hljs.highlightElement(el);
+      }
+    }
+  }, [response]);
+
+  function removeQuotes(jsonString: string): string {
+    const pattern = /"(\w+)":/g;
+    const replacedString = jsonString.replace(pattern, '$1:');
+
+    return replacedString;
+  }
+
+  // const queryRef: LegacyRef<HTMLTextAreaElement> = useRef(null);
+
+  // useEffect(() => {
+  //   const el = queryRef.current;
+
+  //   if (el) {
+  //     if (el.dataset.highlighted === 'yes') {
+  //       delete el.dataset.highlighted;
+  //       hljs.highlightElement(el);
+  //     } else {
+  //       hljs.highlightElement(el);
+  //     }
+  //   }
+  // }, [query]);
+
   const openDocs = (): void => {
     if (!isDocsOpen) {
       getIntrospectionSchema(url).then((res) => {
@@ -112,6 +151,7 @@ const GraphQLPage = (): JSX.Element => {
             placeholder={GraphQLtextObj[lang].queryPlaceholder}
             value={query}
             onChange={(e): void => setQuery(e.target.value)}
+            // ref={queryRef}
           />
           <div className={styles.params}>
             <div className={styles.param_tabs}>
@@ -159,16 +199,18 @@ const GraphQLPage = (): JSX.Element => {
                 }
               />
             </div>
-            <textarea
-              className={styles.input}
-              style={{ display: `${displayParams}` }}
-              value={currParams === 'variables' ? variables : headers}
-              onChange={(e): void =>
-                currParams === 'variables'
-                  ? setVariables(e.target.value)
-                  : setHeaders(e.target.value)
-              }
-            />
+            <pre>
+              <textarea
+                className={styles.input}
+                style={{ display: `${displayParams}` }}
+                value={currParams === 'variables' ? variables : headers}
+                onChange={(e): void =>
+                  currParams === 'variables'
+                    ? setVariables(e.target.value)
+                    : setHeaders(e.target.value)
+                }
+              />
+            </pre>
           </div>
           <button
             className={styles.button_run}
@@ -180,7 +222,15 @@ const GraphQLPage = (): JSX.Element => {
           </button>
         </div>
         <div className={styles.response}>
-          <pre data-testid="response-block">{response}</pre>
+          <pre>
+            <code
+              data-testid="response-block"
+              className="javascript"
+              ref={responseRef}
+            >
+              {removeQuotes(response)}
+            </code>
+          </pre>
 
           {isLoading && <div className={styles.loader} />}
         </div>
