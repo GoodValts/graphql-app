@@ -89,8 +89,12 @@ const GraphQLPage = (): JSX.Element => {
           type="button"
           onClick={(): void => {
             setQuery(prettify(query));
-            setVariables(JSON.stringify(JSON.parse(variables), undefined, 2));
-            setHeaders(JSON.stringify(JSON.parse(headers), undefined, 2));
+            if (variables) {
+              setVariables(JSON.stringify(JSON.parse(variables), undefined, 2));
+            }
+            if (headers) {
+              setHeaders(JSON.stringify(JSON.parse(headers), undefined, 2));
+            }
           }}
         >
           {GraphQLtextObj[lang].prettify}
