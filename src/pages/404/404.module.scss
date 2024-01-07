@@ -27,6 +27,7 @@
 .button {
   @include _button;
   font-size: $sizeDesktopNormal;
+  margin: 0 auto;
   margin-top: $marginDesktop;
 
   @include _tablet {
