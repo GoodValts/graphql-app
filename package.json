@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://goodvalts.github.io/test/",
+  "homepage": "https://<username>.github.io/<repo>/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
