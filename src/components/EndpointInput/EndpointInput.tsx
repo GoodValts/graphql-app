@@ -5,7 +5,6 @@ import { RootState } from '../../redux/store';
 import { setEndpoint } from '../../redux/reducers/endpointSlice';
 import { makeRequest } from '../../utils/api';
 import EndpointTextObj from './langData';
-
 import styles from './EndpointInput.module.scss';
 
 const EndpointInput = (): JSX.Element => {
@@ -14,6 +13,11 @@ const EndpointInput = (): JSX.Element => {
   const [statusColor, setStatusColor] = useState('status_loading');
   const [statusMessage, setStatusMessage] = useState('');
   const { lang } = useContext(AuthContext);
+
+  const handleChange = (value: string): void => {
+    localStorage.setItem('endpoint', value);
+    dispatch(setEndpoint(value));
+  };
 
   useEffect(() => {
     setStatusColor('status_loading');
@@ -28,11 +32,6 @@ const EndpointInput = (): JSX.Element => {
       }
     );
   }, [url]);
-
-  const handleChange = (value: string): void => {
-    localStorage.setItem('endpoint', value);
-    dispatch(setEndpoint(value));
-  };
 
   return (
     <div className={styles.endpoint}>

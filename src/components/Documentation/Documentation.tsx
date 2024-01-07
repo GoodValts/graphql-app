@@ -10,6 +10,7 @@ interface DocumentationType {
 
 const Documentation = (props: DocumentationType): JSX.Element => {
   const { schema } = props;
+
   return (
     <div className={styles.docs} data-testid="docs">
       <pre>

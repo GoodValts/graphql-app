@@ -11,7 +11,7 @@ export const getErrorMessage = (error: string, lang: string): void => {
       toast.error(textObj[lang].errorUserExist);
       break;
     case 'auth/operation-not-allowed':
-      toast.error(textObj[lang].errorUnpossible);
+      toast.error(textObj[lang].errorImpossible);
       break;
     default:
       toast.error(textObj[lang].errorDefault);

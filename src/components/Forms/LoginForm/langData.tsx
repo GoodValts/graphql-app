@@ -19,7 +19,7 @@ const textObj: TextObjType = {
     email: 'E-mail:',
     password: 'Password:',
     button: 'Submit',
-    successLogin: 'You are successfull login!',
+    successLogin: 'You are successful login!',
     errorManyRequests:
       'Too many unsuccessful login attempts, account is temporarily locked',
     errorEmailAndPassword: 'Incorrect email or password!',

@@ -8,7 +8,7 @@ interface TextObjType {
     button: string;
     successMessage: string;
     errorUserExist: string;
-    errorUnpossible: string;
+    errorImpossible: string;
     errorDefault: string;
   };
 }
@@ -21,9 +21,9 @@ const textObj: TextObjType = {
     password: 'Password:',
     confirmPassword: 'Confirm password',
     button: 'Submit',
-    successMessage: 'You are successfull registered!',
+    successMessage: 'You are successful registered!',
     errorUserExist: 'User with such email already exist!',
-    errorUnpossible: 'Registration in the application is not possible.',
+    errorImpossible: 'Registration in the application is not possible.',
     errorDefault: 'Attention! We got an error!',
   },
   ru: {
@@ -35,7 +35,7 @@ const textObj: TextObjType = {
     button: 'Создать',
     successMessage: 'Вы успешно зарегистрировались!',
     errorUserExist: 'Пользователь с таким email уже существует!',
-    errorUnpossible: 'Регистрация в приложении не возможна.',
+    errorImpossible: 'Регистрация в приложении не возможна.',
     errorDefault: 'Внимание! Произошла ошибка!',
   },
 };

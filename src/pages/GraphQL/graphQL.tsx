@@ -1,4 +1,4 @@
-import { LegacyRef, useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { printSchema } from 'graphql';
 import hljs from 'highlight.js';
@@ -11,15 +11,13 @@ import { AuthContext } from '../../controllers/appControllers';
 import GraphQLtextObj from './langData';
 import prettify from '../../utils/prettify';
 import { makeRequest, getIntrospectionSchema } from '../../utils/api';
-
 import document from '../../assets/img/doc.svg';
 import stick from '../../assets/img/magic-stick.svg';
-
 import styles from './graphQL.module.scss';
 
 hljs.registerLanguage('javascript', javascript);
 
-const examleQuery = `query AllCharacters($page: Int, $filter: FilterCharacter) {
+const exampleQuery = `query AllCharacters($page: Int, $filter: FilterCharacter) {
   characters(page: $page, filter: $filter) {
     results {
       name
@@ -36,7 +34,7 @@ const exampleVariables = `{
 }`;
 
 const GraphQLPage = (): JSX.Element => {
-  const [query, setQuery] = useState(examleQuery);
+  const [query, setQuery] = useState(exampleQuery);
   const [response, setResponse] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [displayParams, setDisplayParams] = useState('none');

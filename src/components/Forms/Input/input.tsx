@@ -2,7 +2,7 @@ import { FieldError } from 'react-hook-form/dist/types';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { UseFormRegister } from 'react-hook-form/dist/types/form';
 import { Path } from 'react-hook-form/dist/types/path';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import visibleImg from './inputAssets/visible-icon.png';
 import unVisibleImg from './inputAssets/unVisible-icon.png';
 import defStyles from './input.module.scss';
