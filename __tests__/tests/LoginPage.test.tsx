@@ -1,7 +1,5 @@
-import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthContext } from '../../src/controllers/appControllers';
 import LoginPage from '../../src/pages/LoginPage/login';

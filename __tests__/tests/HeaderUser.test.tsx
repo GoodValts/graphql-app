@@ -1,18 +1,9 @@
-import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import Header from '../../src/components/Header/header';
-import AuthProvider, {
-  AuthContext,
-} from '../../src/controllers/appControllers';
-
-const mockAuthContextEn = {
-  isAuth: false,
-  lang: 'en',
-  setLang: (): void => {},
-};
+import AuthProvider from '../../src/controllers/appControllers';
 
 jest.mock('react-firebase-hooks/auth', () => ({
   useAuthState: jest.fn().mockReturnValue([
