@@ -33,6 +33,16 @@
   font-size: $sizeDesktopSmall;
   background: #fff;
   color: $defaultTextColor;
+
+  @include _tablet {
+    font-size: $sizeDesktopSmall;
+  }
+
+  @include _mobile {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
 }
 
 .header {
@@ -44,9 +54,16 @@
 }
 
 .button,
+.button_prettify,
 .button_active {
   @include _graphql_btn;
   height: 2rem;
+}
+
+.button_prettify {
+  @include _mobile {
+    display: none;
+  }
 }
 
 .button_active {
@@ -54,9 +71,11 @@
   color: $defaultTextColor;
 }
 
-.button_doc {
+.button_doc,
+.button_prettify_icon {
   position: relative;
   z-index: 3;
+  padding-right: 10px;
   border: none;
   background: transparent;
 
@@ -69,6 +88,16 @@
     &:hover {
       scale: 1.1;
     }
+  }
+}
+
+.button_prettify_icon {
+  display: none;
+  z-index: 0;
+  padding: unset;
+
+  @include _mobile {
+    display: block;
   }
 }
 
@@ -101,20 +130,29 @@
   gap: 10px;
   height: 100%;
   width: calc(100vw - 20px);
+
+  @include _mobile {
+    flex-direction: column;
+  }
 }
 
 .query {
   position: relative;
   width: 100%;
   height: 100%;
-  background: #c6d7d5;
+  background: $darkBackgroundColor;
   border-radius: 5px;
+
+  @include _mobile {
+    height: calc(100vh - 150px);
+  }
 }
 
 .input {
   width: 100%;
   height: 100%;
   padding: 3px 10px;
+  padding-right: 4rem;
   outline: none;
   border: none;
   border-radius: 3px;
@@ -130,7 +168,7 @@
   width: 100%;
   height: auto;
   border-radius: 0 0 5px 5px;
-  background: #c6d7d5;
+  background: $darkBackgroundColor;
 
   .input {
     height: 10rem;
@@ -142,6 +180,7 @@
   padding: 3px 10px;
   display: flex;
   gap: 1rem;
+  height: calc(2rem + 6px);
   border-top: 1px solid $highlightedTextColor;
 
   .button {
@@ -174,6 +213,10 @@
   height: 100%;
   padding: 5px 15px;
   overflow: scroll;
+
+  @include _mobile {
+    min-height: 50vh;
+  }
 
   pre {
     font-family: Consolas, monaco, monospace;

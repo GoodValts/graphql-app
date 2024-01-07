@@ -13,7 +13,17 @@
   background: #fff;
   overflow-y: scroll;
   white-space: pre-wrap;
+
+  @include _tablet {
+    width: 50vw;
+  }
+
+  @include _mobile {
+    width: 100vw;
+    height: 100vh;
+  }
 }
+
 .codePanel {
   display: block;
   width: 95%;

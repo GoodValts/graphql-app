@@ -13,6 +13,7 @@ import prettify from '../../utils/prettify';
 import { makeRequest, getIntrospectionSchema } from '../../utils/api';
 
 import document from '../../assets/img/doc.svg';
+import stick from '../../assets/img/magic-stick.svg';
 
 import styles from './graphQL.module.scss';
 
@@ -70,6 +71,16 @@ const GraphQLPage = (): JSX.Element => {
     );
   };
 
+  const handlePrettify = (): void => {
+    setQuery(prettify(query));
+    if (variables) {
+      setVariables(JSON.stringify(JSON.parse(variables), undefined, 2));
+    }
+    if (headers) {
+      setHeaders(JSON.stringify(JSON.parse(headers), undefined, 2));
+    }
+  }
+
   const responseRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -124,15 +135,18 @@ const GraphQLPage = (): JSX.Element => {
       {isDocsOpen && <Documentation schema={schema} />}
       <div className={styles.header}>
         <button
-          className={styles.button}
+          className={styles.button_prettify}
           type="button"
-          onClick={(): void => {
-            setQuery(prettify(query));
-            setVariables(JSON.stringify(JSON.parse(variables), undefined, 2));
-            setHeaders(JSON.stringify(JSON.parse(headers), undefined, 2));
-          }}
+          onClick={handlePrettify}
         >
           {GraphQLtextObj[lang].prettify}
+        </button>
+        <button
+          className={styles.button_prettify_icon}
+          type="button"
+          onClick={handlePrettify}
+        >
+          <img src={stick} alt="prettify" />
         </button>
         <EndpointInput />
         <button
