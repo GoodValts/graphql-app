@@ -1,8 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { PropsWithChildren } from 'react';
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import {
+  render,
+  RenderHookOptions,
+  RenderResult,
+} from '@testing-library/react';
 import type { RenderOptions } from '@testing-library/react';
 import { Provider } from 'react-redux';
 
@@ -23,9 +25,10 @@ export default function renderWithProviders(
     store = setupStore(preloadedState),
     ...renderOptions
   }: ExtendedRenderOptions = {}
-) {
+): { store: AppStore; result: RenderResult } {
   function Wrapper({ children }: PropsWithChildren<INullType>): JSX.Element {
     return <Provider store={store}>{children}</Provider>;
   }
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+  const result = render(ui, { wrapper: Wrapper, ...renderOptions });
+  return { store, result };
 }

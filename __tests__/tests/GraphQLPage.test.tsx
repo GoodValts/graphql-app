@@ -68,21 +68,4 @@ describe('Test GraphQLPage', () => {
       expect(docs).toBeInTheDocument();
     });
   });
-  /* it('click arrow btn', async () => {
-    renderWithProviders(
-      <AuthContext.Provider value={mockAuthContext}>
-        <BrowserRouter>
-          <GraphQLPage />
-        </BrowserRouter>
-      </AuthContext.Provider>
-    );
-    const arrowBtn = screen.getByTestId('arrow-btn');
-    const user = userEvent.setup();
-    user.click(arrowBtn);
-    const response = screen.getByTestId('response-block');
-    await act(async () => {
-      expect(response.textContent).not.toEqual('');
-    });
-    expect(response).toHaveTextContent('Rick Sanchez');
-  }); */
 });

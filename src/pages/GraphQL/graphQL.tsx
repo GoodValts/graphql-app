@@ -79,14 +79,12 @@ const GraphQLPage = (): JSX.Element => {
     if (headers) {
       setHeaders(JSON.stringify(JSON.parse(headers), undefined, 2));
     }
-  }
+  };
 
   const responseRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const el = responseRef.current;
-    console.log(el);
-    console.log(el?.dataset.highlighted);
     if (el) {
       if (el.dataset.highlighted === 'yes') {
         delete el.dataset.highlighted;
@@ -103,21 +101,6 @@ const GraphQLPage = (): JSX.Element => {
 
     return replacedString;
   }
-
-  // const queryRef: LegacyRef<HTMLTextAreaElement> = useRef(null);
-
-  // useEffect(() => {
-  //   const el = queryRef.current;
-
-  //   if (el) {
-  //     if (el.dataset.highlighted === 'yes') {
-  //       delete el.dataset.highlighted;
-  //       hljs.highlightElement(el);
-  //     } else {
-  //       hljs.highlightElement(el);
-  //     }
-  //   }
-  // }, [query]);
 
   const openDocs = (): void => {
     if (!isDocsOpen) {
@@ -165,7 +148,6 @@ const GraphQLPage = (): JSX.Element => {
             placeholder={GraphQLtextObj[lang].queryPlaceholder}
             value={query}
             onChange={(e): void => setQuery(e.target.value)}
-            // ref={queryRef}
           />
           <div className={styles.params}>
             <div className={styles.param_tabs}>
