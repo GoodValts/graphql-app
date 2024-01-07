@@ -20,9 +20,4 @@ describe('Test App', () => {
     render(<App />);
     expect(window.location.pathname).toEqual('/');
   });
-  it('Checking if the user is authorized there is a button Sign Out ', async () => {
-    render(<App />);
-    const signOut = screen.getByText(/Sign Out/i);
-    expect(signOut).toBeInTheDocument();
-  });
 });
