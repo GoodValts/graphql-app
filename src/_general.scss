@@ -1,5 +1,3 @@
-// indents
-
 $marginDesktop: 2rem;
 $marginDesktopDiv2: calc($marginDesktop / 2);
 $marginDesktopDiv4: calc($marginDesktop / 4);
@@ -9,19 +7,15 @@ $marginTabletDiv2: calc($marginTablet / 2);
 
 $marginMobile: 0.5rem;
 
-// fonts
+$sizeDesktopSmall: 1rem;
+$sizeDesktopNormal: 1.4rem;
+$sizeDesktopBig: 2rem;
+$sizeDesktopHeader: 3rem;
 
-$sizeDesktopSmall: 1rem; // 16px
-$sizeDesktopNormal: 1.4rem; // 22.4px
-$sizeDesktopBig: 2rem; // 32px
-$sizeDesktopHeader: 3rem; // 48px
-
-$sizeMobileSmall: 1rem; // 16px
-$sizeMobileNormal: 1.2rem; // 19.2px
-$sizeMobileBig: 1.5rem; // 24px
-$sizeMobileHeader: 2rem; // 32px
-
-// color scheme
+$sizeMobileSmall: 1rem;
+$sizeMobileNormal: 1.2rem;
+$sizeMobileBig: 1.5rem;
+$sizeMobileHeader: 2rem;
 
 $mainColor: #20284d;
 
@@ -33,8 +27,6 @@ $disabledTextColor: LightSlateGray;
 
 $defaultHeaderColor: #f8f9fa;
 $highlightedHeaderColor: #6495ed;
-
-// adaptive mixins
 
 @mixin _hover {
   @media (hover: hover) {

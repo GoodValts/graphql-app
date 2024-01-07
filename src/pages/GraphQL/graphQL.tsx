@@ -1,9 +1,11 @@
-import { LegacyRef, useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { printSchema } from 'graphql';
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/intellij-light.css';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../redux/store';
 import Documentation from '../../components/Documentation/Documentation';
 import EndpointInput from '../../components/EndpointInput/EndpointInput';
@@ -11,15 +13,14 @@ import { AuthContext } from '../../controllers/appControllers';
 import GraphQLtextObj from './langData';
 import prettify from '../../utils/prettify';
 import { makeRequest, getIntrospectionSchema } from '../../utils/api';
-
 import document from '../../assets/img/doc.svg';
 import stick from '../../assets/img/magic-stick.svg';
-
 import styles from './graphQL.module.scss';
+import { auth } from '../../firebase/firebase';
 
 hljs.registerLanguage('javascript', javascript);
 
-const examleQuery = `query AllCharacters($page: Int, $filter: FilterCharacter) {
+const exampleQuery = `query AllCharacters($page: Int, $filter: FilterCharacter) {
   characters(page: $page, filter: $filter) {
     results {
       name
@@ -36,7 +37,7 @@ const exampleVariables = `{
 }`;
 
 const GraphQLPage = (): JSX.Element => {
-  const [query, setQuery] = useState(examleQuery);
+  const [query, setQuery] = useState(exampleQuery);
   const [response, setResponse] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [displayParams, setDisplayParams] = useState('none');
@@ -45,6 +46,8 @@ const GraphQLPage = (): JSX.Element => {
   const [headers, setHeaders] = useState('');
   const [isDocsOpen, setDocsOpen] = useState(false);
   const [schema, setSchema] = useState('');
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   const { lang } = useContext(AuthContext);
   const url = useSelector((state: RootState) => state.endpoint.value);
 
@@ -85,8 +88,6 @@ const GraphQLPage = (): JSX.Element => {
 
   useEffect(() => {
     const el = responseRef.current;
-    console.log(el);
-    console.log(el?.dataset.highlighted);
     if (el) {
       if (el.dataset.highlighted === 'yes') {
         delete el.dataset.highlighted;
@@ -97,27 +98,13 @@ const GraphQLPage = (): JSX.Element => {
     }
   }, [response]);
 
-  function removeQuotes(jsonString: string): string {
-    const pattern = /"(\w+)":/g;
-    const replacedString = jsonString.replace(pattern, '$1:');
-
-    return replacedString;
-  }
-
-  // const queryRef: LegacyRef<HTMLTextAreaElement> = useRef(null);
-
-  // useEffect(() => {
-  //   const el = queryRef.current;
-
-  //   if (el) {
-  //     if (el.dataset.highlighted === 'yes') {
-  //       delete el.dataset.highlighted;
-  //       hljs.highlightElement(el);
-  //     } else {
-  //       hljs.highlightElement(el);
-  //     }
-  //   }
-  // }, [query]);
+  useEffect(() => {
+    if (!user) {
+      setTimeout(() => {
+        navigate('/login');
+      }, 0);
+    }
+  }, [user]);
 
   const openDocs = (): void => {
     if (!isDocsOpen) {
@@ -169,7 +156,6 @@ const GraphQLPage = (): JSX.Element => {
             placeholder={GraphQLtextObj[lang].queryPlaceholder}
             value={query}
             onChange={(e): void => setQuery(e.target.value)}
-            // ref={queryRef}
           />
           <div className={styles.params}>
             <div className={styles.param_tabs}>
@@ -241,13 +227,12 @@ const GraphQLPage = (): JSX.Element => {
           <pre>
             <code
               data-testid="response-block"
-              className="javascript"
+              className="json"
               ref={responseRef}
             >
-              {removeQuotes(response)}
+              {response}
             </code>
           </pre>
-
           {isLoading && <div className={styles.loader} />}
         </div>
       </div>

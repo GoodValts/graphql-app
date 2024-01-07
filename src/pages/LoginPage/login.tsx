@@ -7,14 +7,14 @@ const textObj: {
   [key: string]: { paragraphStart: string; link: string; paragraphEnd: string };
 } = {
   en: {
-    paragraphStart: "Don't have an account? ",
+    paragraphStart: "Don't have an account?",
     link: 'Sign up',
-    paragraphEnd: ' now!',
+    paragraphEnd: 'now!',
   },
   ru: {
-    paragraphStart: 'Нет учетной записи? ',
+    paragraphStart: 'Нет учетной записи?',
     link: 'Присоединяйтесь',
-    paragraphEnd: ' к нам!',
+    paragraphEnd: 'к нам!',
   },
 };
 
@@ -24,10 +24,10 @@ const LoginPage = (): JSX.Element => {
     <>
       <LoginForm />
       <p className={styles.paragraph}>
-        {textObj[lang].paragraphStart}
+        {textObj[lang].paragraphStart}{' '}
         <a className={styles.link} href="/registration">
           {textObj[lang].link}
-        </a>
+        </a>{' '}
         {textObj[lang].paragraphEnd}
       </p>
     </>

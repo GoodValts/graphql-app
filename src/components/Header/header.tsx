@@ -1,8 +1,6 @@
-import { Nav, Stack, Button, ButtonGroup, ToggleButton } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { key } from 'localforage';
 import logo from '../../assets/img/logo3.png';
 import singInLogo from '../../assets/img/login.png';
 import singUpLogo from '../../assets/img/register.png';

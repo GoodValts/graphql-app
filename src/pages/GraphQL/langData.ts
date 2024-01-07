@@ -1,4 +1,4 @@
-interface GrapgQLLangObjType {
+interface GraphQLLangObjType {
   prettify: string;
   urlPlaceholder: string;
   queryPlaceholder: string;
@@ -7,11 +7,11 @@ interface GrapgQLLangObjType {
   errorMessage: string;
 }
 
-interface GrapgQLTextObjType {
-  [key: string]: GrapgQLLangObjType;
+interface GraphQLTextObjType {
+  [key: string]: GraphQLLangObjType;
 }
 
-const GrapgQLtextObj: GrapgQLTextObjType = {
+const GraphQLtextObj: GraphQLTextObjType = {
   en: {
     prettify: 'Prettify',
     urlPlaceholder: 'Enter URL',
@@ -30,4 +30,4 @@ const GrapgQLtextObj: GrapgQLTextObjType = {
   },
 };
 
-export default GrapgQLtextObj;
+export default GraphQLtextObj;

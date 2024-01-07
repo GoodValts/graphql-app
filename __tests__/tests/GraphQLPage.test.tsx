@@ -1,9 +1,7 @@
-import React from 'react';
 import '@testing-library/jest-dom';
 import { screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import { act } from 'react-dom/test-utils';
 import { AuthContext } from '../../src/controllers/appControllers';
 import GraphQLPage from '../../src/pages/GraphQL/graphQL';
 import renderWithProviders from '../../__test-helpers__/test-helpers';
@@ -68,21 +66,4 @@ describe('Test GraphQLPage', () => {
       expect(docs).toBeInTheDocument();
     });
   });
-  /* it('click arrow btn', async () => {
-    renderWithProviders(
-      <AuthContext.Provider value={mockAuthContext}>
-        <BrowserRouter>
-          <GraphQLPage />
-        </BrowserRouter>
-      </AuthContext.Provider>
-    );
-    const arrowBtn = screen.getByTestId('arrow-btn');
-    const user = userEvent.setup();
-    user.click(arrowBtn);
-    const response = screen.getByTestId('response-block');
-    await act(async () => {
-      expect(response.textContent).not.toEqual('');
-    });
-    expect(response).toHaveTextContent('Rick Sanchez');
-  }); */
 });
