@@ -37,7 +37,7 @@ const LoginForm = (): JSX.Element => {
     if (user) {
       setTimeout(() => {
         navigate('/graphQL');
-      }, 5000);
+      }, 1500);
     }
   }, [user]);
 

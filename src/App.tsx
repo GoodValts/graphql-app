@@ -22,7 +22,8 @@ const router = createBrowserRouter(
       <Route path="/login" element={<LoginPage />} />
       <Route path="/*" element={<NotFoundPage />} />
     </Route>
-  )
+  ),
+  { basename: '/graphiql-app/' }
 );
 
 const App = (): JSX.Element => {

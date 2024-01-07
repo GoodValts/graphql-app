@@ -4,6 +4,8 @@ import { printSchema } from 'graphql';
 import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/intellij-light.css';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../redux/store';
 import Documentation from '../../components/Documentation/Documentation';
 import EndpointInput from '../../components/EndpointInput/EndpointInput';
@@ -14,6 +16,7 @@ import { makeRequest, getIntrospectionSchema } from '../../utils/api';
 import document from '../../assets/img/doc.svg';
 import stick from '../../assets/img/magic-stick.svg';
 import styles from './graphQL.module.scss';
+import { auth } from '../../firebase/firebase';
 
 hljs.registerLanguage('javascript', javascript);
 
@@ -43,6 +46,8 @@ const GraphQLPage = (): JSX.Element => {
   const [headers, setHeaders] = useState('');
   const [isDocsOpen, setDocsOpen] = useState(false);
   const [schema, setSchema] = useState('');
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   const { lang } = useContext(AuthContext);
   const url = useSelector((state: RootState) => state.endpoint.value);
 
@@ -93,12 +98,13 @@ const GraphQLPage = (): JSX.Element => {
     }
   }, [response]);
 
-  function removeQuotes(jsonString: string): string {
-    const pattern = /"(\w+)":/g;
-    const replacedString = jsonString.replace(pattern, '$1:');
-
-    return replacedString;
-  }
+  useEffect(() => {
+    if (!user) {
+      setTimeout(() => {
+        navigate('/login');
+      }, 0);
+    }
+  }, [user]);
 
   const openDocs = (): void => {
     if (!isDocsOpen) {
