@@ -219,13 +219,12 @@ const GraphQLPage = (): JSX.Element => {
           <pre>
             <code
               data-testid="response-block"
-              className="javascript"
+              className="json"
               ref={responseRef}
             >
-              {removeQuotes(response)}
+              {response}
             </code>
           </pre>
-
           {isLoading && <div className={styles.loader} />}
         </div>
       </div>
