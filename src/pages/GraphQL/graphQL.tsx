@@ -79,7 +79,7 @@ const GraphQLPage = (): JSX.Element => {
     if (headers) {
       setHeaders(JSON.stringify(JSON.parse(headers), undefined, 2));
     }
-  }
+  };
 
   const responseRef = useRef<HTMLElement | null>(null);
 
@@ -121,10 +121,14 @@ const GraphQLPage = (): JSX.Element => {
 
   const openDocs = (): void => {
     if (!isDocsOpen) {
-      getIntrospectionSchema(url).then((res) => {
-        setDocsOpen(true);
-        setSchema(printSchema(res));
-      });
+      try {
+        getIntrospectionSchema(url).then((res) => {
+          setDocsOpen(true);
+          setSchema(printSchema(res));
+        });
+      } catch {
+        setSchema('');
+      }
     } else {
       setDocsOpen(false);
     }
