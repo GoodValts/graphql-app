@@ -63,7 +63,9 @@ const GraphQLPage = (): JSX.Element => {
         if (res.data) {
           setResponse(JSON.stringify(res.data, undefined, 2));
         } else if (res.errors) {
-          setResponse(JSON.stringify(res.errors, undefined, 2));
+          setResponse(
+            JSON.stringify((res.errors as Error[])[0].message, undefined, 2)
+          );
         }
         setLoading(false);
       },
@@ -227,7 +229,7 @@ const GraphQLPage = (): JSX.Element => {
           <pre>
             <code
               data-testid="response-block"
-              className="json"
+              className={`json ${styles.preWrap}`}
               ref={responseRef}
             >
               {response}
