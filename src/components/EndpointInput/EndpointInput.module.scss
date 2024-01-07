@@ -47,4 +47,8 @@
   right: 2rem;
   font-size: 1rem;
   color: #90281c;
+
+  @include _mobile {
+    display: none;
+  }
 }
