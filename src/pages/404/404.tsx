@@ -9,10 +9,10 @@ const NotFoundPage = (): JSX.Element => {
   };
 
   return (
-    <section className={styles.exampleStyle}>
-      <div>
-        <div>Page not found!</div>
-        <button type="button" onClick={backToMain}>
+    <section className={styles.page}>
+      <div className={styles.errorBlock}>
+        <div className={styles.text}>Page not found!</div>
+        <button type="button" onClick={backToMain} className={styles.button}>
           Return to main page
         </button>
       </div>
