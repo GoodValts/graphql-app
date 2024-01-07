@@ -2,13 +2,17 @@
 
 ### Contents
 * [Description](#description)
-* [Purpose](#purpose)
 * [Technologies](#technologies)
 * [Install](#install)
 * [Scripts](#available-scripts)
 * [Team](#team)
 
 ---
+## Description
+Welcome to our **Phoenix GraphQL Application**! This application is the final [task](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/graphiql.md) of the [RSSchool React 2023Q4 course](https://rs.school/react/), developed by the [Phoenix Team](#team).
+
+Our application provides playground/IDE for graphQL requests. [Join](#install) on this exciting journey and enjoy!
+
 ## Technologies
 Technology stack:
 * React
