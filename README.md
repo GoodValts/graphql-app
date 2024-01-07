@@ -1,27 +1,65 @@
-# React + TypeScript + Vite
+# Phoenix GraphQL App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Contents
+* [Description](#description)
+* [Technologies](#technologies)
+* [Install](#install)
+* [Scripts](#available-scripts)
+* [Team](#team)
 
-Currently, two official plugins are available:
+---
+## Description
+Welcome to our **Phoenix GraphQL Application**! This application is the final [task](https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/graphiql.md) of the [RSSchool React 2023Q4 course](https://rs.school/react/), developed by the [Phoenix Team](#team).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Our application provides playground/IDE for graphQL requests. [Join](#install) on this exciting journey and enjoy!
 
-## Expanding the ESLint configuration
+## Technologies
+Technology stack:
+* React
+* Redux
+* TypeScript
+* GraphQL
+* Vite
+* Firebase
+* SCSS
+* ESLint
+* Prettier
+* Husky
+* Jest
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Install
+To start the application, please make sure you have [Git](https://git-scm.com) and [Node.js](https://nodejs.org) installed on your machine. Then, follow these steps: 
+1. Clone repository: `git clone https://github.com/GoodValts/graphiql-app.git`
+1. Navigate to the project directory: `cd graphiql-app`
+1. Switch to 'develop' branch: `git checkout develop`
+1. Install dependencies: `npm install`
+1. Start the development server: `npm run dev`
+1. Open the link or navigate to `http://localhost:5173/`
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+## Available Scripts
+In the project directory, you can run scripts:
+* `npm run dev` - starts the development server using Vite
+* `npm run build` - compiles code and creates an optimized build for deployment
+* `npm run preview` - launches a local server to preview the web application
+* `npm run lint` - runs ESLint to check the code for potential issues and adherence to coding style rules
+* `npm run lint:fix` - runs ESLint and automatically fixes any fixable issues in the code
+* `npm run format:fix` - uses Prettier to automatically format the code and make it consistent
+* `npm run pret:check` - checks if the code conforms to the formatting rules defined by Prettier
+* `npm run prepare` - sets up the Husky library, which manages Git hooks
+* `npm run test` - runs the test suites using the Jest testing framework
+* `npm run coverage` - runs the test suites and generates a code coverage report
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Team
+
+The Application was created by `Phoenix Team`.
+
+Our members:
+* **Ivan Martynjuk** ([GoodValts](https://github.com/GoodValts))
+* **Anastasiya Alisenok** ([AnastasiyaAlisenok](https://github.com/AnastasiyaAlisenok))
+* **Natallia Ivanyuk** ([whiterabbit8](https://github.com/whiterabbit8))
+
+We burned, but rose from the ashes!
+
+Join our team members, experience the enjoyment and pleasure that awaits you!
