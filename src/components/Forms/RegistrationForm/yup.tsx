@@ -103,7 +103,7 @@ const registrationSchema = (
         (value) => {
           switch (lang) {
             case 'ru':
-              return /^[A-Z]/.test(value);
+              return /^[А-Я]/.test(value);
             default:
               return /^[A-Z]/.test(value);
           }
