@@ -63,7 +63,10 @@ const Header = (): JSX.Element => {
         scrollWindow ? `${styles.header} ${styles.sticky}` : styles.header
       }
     >
-      <a className={styles.logoContainer} href="/">
+      <a
+        className={styles.logoContainer}
+        href="https://goodvalts.github.io/graphql-app/"
+      >
         <img src={logo} className={styles.logo} alt="logo" />
         <p className={styles.logoText}>{textObj[lang].project}</p>
       </a>
